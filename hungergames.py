@@ -777,8 +777,9 @@ if not st.session_state.name_submitted:
         st.markdown(f"""
             <div style="display:flex;justify-content:center;margin:1.5rem 0 2rem 0;">
                 <img src="data:image/jpeg;base64,{sansback_base64}"
-                     style="max-width:95%; max-height:80vh;
-                            box-shadow:0 0 40px rgba(197,44,44,0.35);">
+                     style="width: 900px; max-width: 95%; height: auto;
+       border-radius: 12px;
+       box-shadow: 0 0 40px rgba(197,44,44,0.35);"
             </div>
         """, unsafe_allow_html=True)
 
