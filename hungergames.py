@@ -155,7 +155,6 @@ BASE_QUESTIONS = [
             "Beetee":   [3, 0, 0, 0, 3, 0]
         }
     },
-
     # ===== ORIGINAL PLAKSHA QUESTIONS =====
     {
         "question": "What are you most given to do if you have an upcoming test and wifi is down (for a long time)?",
@@ -360,7 +359,6 @@ def show_access_denied():
             <div style="color:#bbb;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;">The Capitol rejects this intrusion.</div>
         </div>
     """, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -383,7 +381,6 @@ def show_chewie():
             </div>
         </div>
     """, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -396,7 +393,6 @@ def show_chewie():
 def show_result():
     character = st.session_state.result
     scores = st.session_state.scores
-
     st.markdown("""
         <div class="result-container">
             <div class="fire-symbol">🔥</div>
@@ -404,7 +400,6 @@ def show_result():
             <div class="result-title">YOUR CHARACTER</div>
         </div>
     """, unsafe_allow_html=True)
-
     st.markdown(f"""
         <div class="result-card">
             <div class="result-capitol">THE CAPITOL HAS SPOKEN</div>
@@ -412,15 +407,12 @@ def show_result():
             <div class="result-score">Final score: {scores[character]}</div>
         </div>
     """, unsafe_allow_html=True)
-
     with st.expander("VIEW ALIGNMENT"):
         score_dict = dict(scores)
         min_s = min(score_dict.values()) if score_dict else 0
         shifted = {k: v - min_s for k, v in score_dict.items()}
         total = sum(shifted.values()) or 1
-
         ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
-
         rows = []
         for char, val in ranked:
             pct = (val / total) * 100
@@ -434,12 +426,9 @@ def show_result():
                 f'</div>'
             )
             rows.append(row)
-
         bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
         st.markdown(bars_html, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
-
     if st.button("RE-ENTER THE ARENA"):
         st.session_state.page = 0
         st.session_state.answers = []
@@ -448,15 +437,16 @@ def show_result():
         st.session_state.scores = None
         st.session_state.name = ""
         st.session_state.name_submitted = False
-        st.session_state.haunted = False  # Reset haunted flag on re-entry
+        # Note: haunted flag is intentionally NOT cleared here
         st.rerun()
 
 # ============================================================
-# MAIN HEADER
+# MAIN HEADER  (hidden when haunted)
 # ============================================================
-st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
-st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
-st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+if not st.session_state.haunted:
+    st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
+    st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # ============================================================
 # ROUTING
@@ -464,33 +454,28 @@ st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 if st.session_state.access_denied:
     show_access_denied()
     st.stop()
-
 if st.session_state.chewie_mode:
     show_chewie()
     st.stop()
-
 if st.session_state.finished:
     show_result()
     st.stop()
 
 # ============================================================
-# NAME CHECK / HAUNTED IMAGE VIEW
+# NAME CHECK
 # ============================================================
 if not st.session_state.name_submitted:
     if st.session_state.haunted and sansback_base64:
-        # Replace "state your name" box with the sansback.jpeg image
+        # Replace the "STATE YOUR NAME" box with the image
         st.markdown(f"""
-            <div style="display:flex;justify-content:center;align-items:center;margin:2rem 0;">
-                <img src="data:image/jpeg;base64,{sansback_base64}" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.5);" alt="Haunted Image">
+            <div style="display:flex;justify-content:center;margin:2rem 0;">
+                <img src="data:image/jpeg;base64,{sansback_base64}"
+                     style="max-width:100%;max-height:420px;border-radius:12px;
+                            box-shadow:0 0 40px rgba(197,44,44,0.35);">
             </div>
         """, unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("BACK TO QUIZ"):
-                st.session_state.haunted = False
-                st.rerun()
     else:
+        # Normal name prompt
         st.markdown("""
             <div class="name-container">
                 <div class="name-title">STATE YOUR NAME</div>
@@ -498,30 +483,26 @@ if not st.session_state.name_submitted:
             </div>
         """, unsafe_allow_html=True)
 
-        name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
-        st.markdown("<br>", unsafe_allow_html=True)
+    name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
+    st.markdown("<br>", unsafe_allow_html=True)
 
-        if st.button("ENTER THE ARENA"):
-            entered_name = name.strip()
-            if not entered_name:
-                st.error("You must state your name before entering the arena.")
-                st.stop()
-
-            if "trinav" in entered_name.lower():
-                st.session_state.access_denied = True
-                st.rerun()
-
-            if "chewie" in entered_name.lower():
-                st.session_state.chewie_mode = True
-                st.rerun()
-
-            if entered_name.lower() in {c.lower() for c in CHARACTERS}:
-                st.error("you think you can choose your own fate?")
-                st.stop()
-
-            st.session_state.name = entered_name
-            st.session_state.name_submitted = True
+    if st.button("ENTER THE ARENA"):
+        entered_name = name.strip()
+        if not entered_name:
+            st.error("You must state your name before entering the arena.")
+            st.stop()
+        if "trinav" in entered_name.lower():
+            st.session_state.access_denied = True
             st.rerun()
+        if "chewie" in entered_name.lower():
+            st.session_state.chewie_mode = True
+            st.rerun()
+        if entered_name.lower() in {c.lower() for c in CHARACTERS}:
+            st.error("you think you can choose your own fate?")
+            st.stop()
+        st.session_state.name = entered_name
+        st.session_state.name_submitted = True
+        st.rerun()
 
     st.stop()   # ← no restart button on name screen
 
@@ -531,17 +512,22 @@ if not st.session_state.name_submitted:
 q_index = st.session_state.page
 question = QUESTIONS[q_index]
 total_questions = len(QUESTIONS)
+
 st.markdown(f'Question {q_index + 1} of {total_questions}', unsafe_allow_html=True)
+
 progress = (q_index + 1) / total_questions
 st.markdown(f"""
 <div class="progress-container">
     <div class="progress-bar" style="width:{progress * 100}%"></div>
 </div>
 """, unsafe_allow_html=True)
+
 st.markdown(f'THE ARENA · QUESTION {q_index + 1}', unsafe_allow_html=True)
 st.markdown(f'{question["question"]}', unsafe_allow_html=True)
+
 option_labels = [f"{chr(65 + i)}. {option}" for i, option in enumerate(question["options"])]
 selected = st.radio("Choose your answer:", option_labels, index=None, key=f"question_{q_index}", label_visibility="collapsed")
+
 st.markdown("", unsafe_allow_html=True)
 
 if selected is not None:
@@ -580,7 +566,7 @@ with col2:
         st.session_state.scores = None
         st.session_state.name = ""
         st.session_state.name_submitted = False
-        st.session_state.haunted = True          # activate haunted flag to show image in name box
+        st.session_state.haunted = True          # activate haunting
         # reshuffle questions on restart
         st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
         st.rerun()
