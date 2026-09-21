@@ -834,19 +834,32 @@ if st.session_state.finished:
 # ============================================================
 # NAME CHECK
 # ============================================================
-if not st.session_state.name_submitted:
+
+if not st.session_state.name_submitted and not st.session_state.haunted:
+
     st.markdown("""
         <div class="name-container">
+
             <div class="name-title">STATE YOUR NAME</div>
+
             <div class="name-subtitle">Before you enter the arena, the Capitol requires your identity.</div>
+
         </div>
     """, unsafe_allow_html=True)
 
-    name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
+    name = st.text_input(
+        "Your name",
+        key="name_input",
+        placeholder="Enter your name...",
+        label_visibility="collapsed"
+    )
+
     st.markdown("<br>", unsafe_allow_html=True)
 
     if st.button("ENTER THE ARENA"):
+
         entered_name = name.strip()
+
         if not entered_name:
             st.error("You must state your name before entering the arena.")
             st.stop()
@@ -867,7 +880,7 @@ if not st.session_state.name_submitted:
         st.session_state.name_submitted = True
         st.rerun()
 
-    st.stop()   # ← no restart button on name screen
+    st.stop()
 
 # ============================================================
 # CURRENT QUESTION
