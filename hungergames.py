@@ -663,7 +663,7 @@ if "shuffled_questions" not in st.session_state:
 QUESTIONS = st.session_state.shuffled_questions
 
 # ============================================================
-# HAUNTING BACKGROUND (sansback.jpeg)
+# HAUNTING BACKGROUND (sansback.jpeg) - ZOOMED OUT
 # ============================================================
 if st.session_state.haunted and sansback_base64:
     st.markdown(f"""
@@ -672,8 +672,9 @@ if st.session_state.haunted and sansback_base64:
             background-image:
                 linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)),
                 url("data:image/jpeg;base64,{sansback_base64}") !important;
-            background-size: cover !important;
+            background-size: 80% !important;
             background-position: center !important;
+            background-repeat: no-repeat !important;
             background-attachment: fixed !important;
         }}
         </style>
@@ -884,55 +885,3 @@ st.markdown(f"""
         <div class="progress-bar" style="width:{progress * 100}%"></div>
     </div>
 """, unsafe_allow_html=True)
-
-st.markdown(f'<div class="question-number">THE ARENA · QUESTION {q_index + 1}</div>', unsafe_allow_html=True)
-st.markdown(f'<div class="question-text">{question["question"]}</div>', unsafe_allow_html=True)
-
-option_labels = [f"{chr(65 + i)}. {option}" for i, option in enumerate(question["options"])]
-selected = st.radio("Choose your answer:", option_labels, index=None, key=f"question_{q_index}", label_visibility="collapsed")
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-if selected is not None:
-    selected_index = option_labels.index(selected)
-    if q_index < total_questions - 1:
-        if st.button("CONTINUE →"):
-            st.session_state.answers.append(selected_index)
-            st.session_state.page += 1
-            st.rerun()
-    else:
-        if st.button("ENTER THE REAPING"):
-            st.session_state.answers.append(selected_index)
-            scores = calculate_scores(st.session_state.answers)
-            character, _ = determine_character(scores)
-            st.session_state.scores = scores
-            st.session_state.result = character
-            st.session_state.finished = True
-            st.rerun()
-else:
-    st.markdown("""
-        <div style="text-align:center;color:#666;font-size:0.8rem;letter-spacing:1px;margin-top:0.5rem;">
-            SELECT AN OPTION TO CONTINUE
-        </div>
-    """, unsafe_allow_html=True)
-
-# ---------- RESTART BUTTON (only during questions) ----------
-st.markdown("<br>", unsafe_allow_html=True)
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
-    if st.button("Had a change of heart? Restart Quiz"):
-        st.session_state.page = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.session_state.result = None
-        st.session_state.scores = None
-        st.session_state.name = ""
-        st.session_state.name_submitted = False
-        st.session_state.haunted = True          # activate haunting
-        # reshuffle questions on restart
-        st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
-        st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown('<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
