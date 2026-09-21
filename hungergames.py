@@ -3,7 +3,6 @@ import random
 from collections import Counter
 import base64
 import os
-import plotly.graph_objects as go
 
 # ============================================================
 # PAGE CONFIG
@@ -344,6 +343,53 @@ div[data-testid="stRadio"] label p {
     filter: drop-shadow(0 0 12px rgba(220,80,20,0.35));
 }
 
+/* Percentage bars */
+.pct-container {
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #111111;
+    border: 1px solid #3a3a3a;
+    border-top: 2px solid #e6b84a;
+}
+
+.pct-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.1rem;
+}
+
+.pct-label {
+    width: 110px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #e6b84a;
+    letter-spacing: 1px;
+}
+
+.pct-bar-bg {
+    flex: 1;
+    height: 18px;
+    background: #1e1e1e;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 12px;
+}
+
+.pct-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
+    border-radius: 2px;
+}
+
+.pct-value {
+    width: 55px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #ccc;
+    font-family: 'Cinzel', serif;
+}
+
 /* ============================================================
    NAME SCREEN
    ============================================================ */
@@ -477,7 +523,7 @@ QUESTIONS = [
             "Beetee":   [0, 0, 0, 0, 0, 0]
         }
     },
-    # QUESTION 4 (as provided)
+    # QUESTION 4
     {
         "question": "You're given 30 seconds at the Cornucopia. What are you taking?",
         "options": [
@@ -717,7 +763,7 @@ def show_result():
         unsafe_allow_html=True
     )
 
-    # ---------- STYLISED PIE CHART ----------
+    # ---------- STYLISED PERCENTAGE BREAKDOWN (no plotly) ----------
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
         """
@@ -725,9 +771,9 @@ def show_result():
             text-align: center;
             font-family: 'Cinzel', serif;
             color: #e6b84a;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             letter-spacing: 3px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             text-transform: uppercase;
         ">
             YOUR ALIGNMENT
@@ -736,58 +782,32 @@ def show_result():
         unsafe_allow_html=True
     )
 
-    # Make scores non-negative for percentage calculation
+    # Convert scores to percentages (shift so all ≥ 0)
     score_dict = dict(scores)
     min_s = min(score_dict.values()) if score_dict else 0
     shifted = {k: v - min_s for k, v in score_dict.items()}
     total = sum(shifted.values()) or 1
 
-    # Keep only characters that have meaningful share (> 2%)
-    labels = []
-    values = []
-    for char, val in sorted(shifted.items(), key=lambda x: x[1], reverse=True):
+    # Sort and keep meaningful ones
+    ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
+
+    bars_html = '<div class="pct-container">'
+    for char, val in ranked:
         pct = (val / total) * 100
-        if pct >= 1.5:          # hide tiny slices
-            labels.append(char)
-            values.append(round(pct, 1))
+        if pct < 1.0:
+            continue
+        bars_html += f'''
+        <div class="pct-row">
+            <div class="pct-label">{char}</div>
+            <div class="pct-bar-bg">
+                <div class="pct-bar-fill" style="width: {pct}%;"></div>
+            </div>
+            <div class="pct-value">{pct:.1f}%</div>
+        </div>
+        '''
+    bars_html += '</div>'
 
-    # Hunger Games colour palette
-    colors = [
-        "#e6b84a", "#c52c2c", "#9e2020", "#d29a32",
-        "#781717", "#f0d78c", "#a91d1d", "#b8b8b8",
-        "#5c5c5c", "#e6b84a", "#c52c2c", "#9e2020",
-        "#d29a32", "#781717"
-    ]
-
-    fig = go.Figure(data=[go.Pie(
-        labels=labels,
-        values=values,
-        hole=0.42,
-        marker=dict(
-            colors=colors[:len(labels)],
-            line=dict(color="#111111", width=2)
-        ),
-        textinfo="label+percent",
-        textfont=dict(size=14, family="Cinzel, serif", color="#eeeeee"),
-        hoverinfo="label+percent+value",
-        pull=[0.06 if lab == character else 0 for lab in labels]
-    )])
-
-    fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        showlegend=False,
-        margin=dict(t=20, b=20, l=20, r=20),
-        height=480,
-        annotations=[dict(
-            text=f"<b>{character.upper()}</b>",
-            x=0.5, y=0.5,
-            font=dict(size=18, family="Cinzel, serif", color="#e6b84a"),
-            showarrow=False
-        )]
-    )
-
-    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+    st.markdown(bars_html, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -861,35 +881,19 @@ if not st.session_state.name_submitted:
             st.error("You must state your name before entering the arena.")
             st.stop()
 
-        # ========================================================
-        # TRINAV CHECK
-        # ========================================================
         if "trinav" in entered_name.lower():
             st.session_state.access_denied = True
             st.rerun()
 
-        # ========================================================
-        # CHEWIE CHECK
-        # ========================================================
         if "chewie" in entered_name.lower():
             st.session_state.chewie_mode = True
             st.rerun()
 
-        # ========================================================
-        # CHARACTER NAME CHECK
-        # ========================================================
-        character_names = {
-            character.lower()
-            for character in CHARACTERS
-        }
-
+        character_names = {character.lower() for character in CHARACTERS}
         if entered_name.lower() in character_names:
             st.error("you think you can choose your own fate?")
             st.stop()
 
-        # ========================================================
-        # VALID NAME
-        # ========================================================
         st.session_state.name = entered_name
         st.session_state.name_submitted = True
         st.rerun()
