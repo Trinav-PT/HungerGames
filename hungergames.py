@@ -686,11 +686,11 @@ def show_credits():
 </div>
 <div style="margin-bottom:2.8rem;">
 <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Names you should not enter</div>
-<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#c52c2c;">Trinav<br>Gaster</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#c52c2c;">Trinav<br>Gaster (if you're on your laptop)</div>
 </div>
 <div style="margin-bottom:2.8rem;">
 <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Names you should enter</div>
-<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Chewie<br>your own name : )</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Chewie<br>your own name =)</div>
 </div>
 <div style="font-family:'Cinzel',serif;font-size:1.15rem;color:#c52c2c;margin-top:3.5rem;letter-spacing:1px;line-height:1.6;">
 ...you really scrolled till the end?<br>EXCELLENT. TRULY EXCELLENT.
