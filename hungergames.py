@@ -4,9 +4,9 @@ from collections import Counter
 import base64
 import os
 
-============================================================
-PAGE CONFIG
-============================================================
+# ============================================================
+# PAGE CONFIG
+# ============================================================
 st.set_page_config(
     page_title="WHO IS YOUR HUNGER GAMES CHARACTER?",
     page_icon="🔥",
@@ -14,9 +14,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-============================================================
-HELPER TO ENCODE BACKGROUND IMAGE
-============================================================
+# ============================================================
+# HELPER TO ENCODE BACKGROUND IMAGE
+# ============================================================
 def get_base64_image(image_path):
     if os.path.exists(image_path):
         with open(image_path, "rb") as img_file:
@@ -28,24 +28,24 @@ chewie_base64 = get_base64_image("chewie.jpeg")
 tf_base64 = get_base64_image("tf.gif")
 sansback_base64 = get_base64_image("sansback.jpeg")
 
-============================================================
-HUNGER GAMES INSPIRED STYLING
-============================================================
+# ============================================================
+# HUNGER GAMES INSPIRED STYLING
+# ============================================================
 st.markdown("""
 """, unsafe_allow_html=True)
 
-============================================================
-CHARACTERS
-============================================================
+# ============================================================
+# CHARACTERS
+# ============================================================
 CHARACTERS = [
     "Katniss", "Peeta", "Gale", "Haymitch", "Prim", "Finnick",
     "Rue", "Snow", "Cinna", "Johanna", "Effie",
     "Plutarch", "Foxface", "Beetee"
 ]
 
-============================================================
-ALL 9 QUESTIONS (base list)
-============================================================
+# ============================================================
+# ALL 9 QUESTIONS (base list)
+# ============================================================
 BASE_QUESTIONS = [
     # ===== HUNGER GAMES QUESTIONS =====
     {
@@ -291,9 +291,9 @@ BASE_QUESTIONS = [
     }
 ]
 
-============================================================
-SESSION STATE
-============================================================
+# ============================================================
+# SESSION STATE
+# ============================================================
 if "page" not in st.session_state:
     st.session_state.page = 0
 if "answers" not in st.session_state:
@@ -320,9 +320,9 @@ if "shuffled_questions" not in st.session_state:
     st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
 QUESTIONS = st.session_state.shuffled_questions
 
-============================================================
-SCORING
-============================================================
+# ============================================================
+# SCORING
+# ============================================================
 def calculate_scores(answers):
     scores = Counter()
     for q_index, answer_index in enumerate(answers):
@@ -340,9 +340,9 @@ def determine_character(scores):
         return tied[0], tied
     return random.choice(tied), tied
 
-============================================================
-ERROR / CHEWIE / RESULT VIEWS
-============================================================
+# ============================================================
+# ERROR / CHEWIE / RESULT VIEWS
+# ============================================================
 def show_access_denied():
     st.markdown(f"""
         <style>
@@ -451,16 +451,16 @@ def show_result():
         st.session_state.haunted = False  # Reset haunted flag on re-entry
         st.rerun()
 
-============================================================
-MAIN HEADER
-============================================================
+# ============================================================
+# MAIN HEADER
+# ============================================================
 st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
 st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
-============================================================
-ROUTING
-============================================================
+# ============================================================
+# ROUTING
+# ============================================================
 if st.session_state.access_denied:
     show_access_denied()
     st.stop()
@@ -473,9 +473,9 @@ if st.session_state.finished:
     show_result()
     st.stop()
 
-============================================================
-NAME CHECK / HAUNTED IMAGE VIEW
-============================================================
+# ============================================================
+# NAME CHECK / HAUNTED IMAGE VIEW
+# ============================================================
 if not st.session_state.name_submitted:
     if st.session_state.haunted and sansback_base64:
         # Replace "state your name" box with the sansback.jpeg image
@@ -525,9 +525,9 @@ if not st.session_state.name_submitted:
 
     st.stop()   # ← no restart button on name screen
 
-============================================================
-CURRENT QUESTION
-============================================================
+# ============================================================
+# CURRENT QUESTION
+# ============================================================
 q_index = st.session_state.page
 question = QUESTIONS[q_index]
 total_questions = len(QUESTIONS)
@@ -567,7 +567,7 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
----------- RESTART BUTTON (only during questions) ----------
+# ---------- RESTART BUTTON (only during questions) ----------
 st.markdown("", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
