@@ -335,7 +335,7 @@ div[data-testid="stRadio"] label p {
 """, unsafe_allow_html=True)
 
 # ============================================================
-# GASTER MODE (Wingdings)
+# GASTER MODE (Wingdings + mobile fallback)
 # ============================================================
 if "gaster_mode" not in st.session_state:
     st.session_state.gaster_mode = False
@@ -343,10 +343,12 @@ if "gaster_mode" not in st.session_state:
 if st.session_state.gaster_mode:
     st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
+
     html, body, [class*="css"], .stApp, .stMarkdown, p, div, span, label, 
     button, input, textarea, h1, h2, h3, h4, h5, h6, 
     .stButton > button, .stRadio label, .stTextInput input {
-        font-family: 'Wingdings', 'Wingdings 2', 'Wingdings 3', sans-serif !important;
+        font-family: 'Wingdings', 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Apple Symbols', sans-serif !important;
     }
     </style>
     """, unsafe_allow_html=True)
