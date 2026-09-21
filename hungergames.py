@@ -768,7 +768,7 @@ def show_credits():
 <div style="margin-bottom:2.8rem;">
 <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Made with DETERMINATION by</div>
 <div style="font-family:'Cinzel',serif;font-size:1.5rem;color:#f1f1f1;letter-spacing:1px;">members of The Spine</div>
-<div style="font-family:'Cinzel',serif;font-size:1.05rem;color:#e6b84a;margin-top:0.6rem;">(watch till the end for secrets 👀)</div>
+<div style="font-family:'Cinzel',serif;font-size:1.05rem;color:#e6b84a;margin-top:0.6rem;">(scroll till the end for secrets 👀)</div>
 </div>
 
 <div style="margin-bottom:2.8rem;">
@@ -797,7 +797,7 @@ def show_credits():
 </div>
 
 <div style="font-family:'Cinzel',serif;font-size:1.15rem;color:#c52c2c;margin-top:3.5rem;letter-spacing:1px;line-height:1.6;">
-...you really watched till the end?<br>Respect.
+...you really watched till the end?<br>EXCELLENT. TRULY EXCELLENT.
 </div>
 
 </div>
