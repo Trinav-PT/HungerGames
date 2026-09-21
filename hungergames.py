@@ -774,14 +774,16 @@ if not st.session_state.name_submitted:
 
     # Show the image BELOW the "STATE YOUR NAME" box when haunted
     if st.session_state.haunted and sansback_base64:
-        st.markdown(f"""
-            <div style="display:flex;justify-content:center;margin:1.5rem 0 2rem 0;">
-                <img src="data:image/jpeg;base64,{sansback_base64}"
-                     style="width: 900px; max-width: 95%; height: auto;
-       border-radius: 12px;
-       box-shadow: 0 0 40px rgba(197,44,44,0.35);"
-            </div>
-        """, unsafe_allow_html=True)
+    st.markdown(f"""
+        <div style="display:flex;justify-content:center;margin:1.5rem 0 2rem 0; overflow:hidden;">
+            <img src="data:image/jpeg;base64,{sansback_base64}"
+                 style="width: 1100px; max-width: 100%; height: auto;
+                        transform: scale(1.6);
+                        transform-origin: center center;
+                        border-radius: 12px;
+                        box-shadow: 0 0 40px rgba(197,44,44,0.35);">
+        </div>
+    """, unsafe_allow_html=True)
 
     name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
     st.markdown("<br>", unsafe_allow_html=True)
