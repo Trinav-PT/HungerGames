@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import random
 from collections import Counter
@@ -278,6 +279,57 @@ div[data-testid="stRadio"] label p {
 }
 
 /* ============================================================
+   NAME SCREEN
+   ============================================================ */
+
+.name-container {
+    max-width: 650px;
+    margin: 4rem auto;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(150,25,25,0.12),
+            transparent 70%
+        ),
+        #111111;
+    border: 1px solid #4b4b4b;
+    border-top: 3px solid #e6b84a;
+    border-bottom: 3px solid #9e2020;
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.65),
+        0 0 30px rgba(130,20,20,0.08);
+}
+
+.name-title {
+    font-family: 'Cinzel', serif;
+    color: #e6b84a;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.name-subtitle {
+    color: #999999;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.name-error {
+    font-family: 'Cinzel', serif;
+    color: #c52c2c;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 
@@ -495,6 +547,12 @@ if "result" not in st.session_state:
 if "scores" not in st.session_state:
     st.session_state.scores = None
 
+if "name" not in st.session_state:
+    st.session_state.name = ""
+
+if "name_submitted" not in st.session_state:
+    st.session_state.name_submitted = False
+
 
 # ============================================================
 # SCORING
@@ -581,8 +639,6 @@ def show_result():
         unsafe_allow_html=True
     )
 
-    # Show all scores, but do not expose the tie-breaking randomness
-    # as part of the main result.
     with st.expander("View your scores"):
         sorted_scores = sorted(
             scores.items(),
@@ -601,6 +657,8 @@ def show_result():
         st.session_state.finished = False
         st.session_state.result = None
         st.session_state.scores = None
+        st.session_state.name = ""
+        st.session_state.name_submitted = False
         st.rerun()
 
 
@@ -619,6 +677,77 @@ st.markdown(
 )
 
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+
+
+# ============================================================
+# NAME CHECK
+# ============================================================
+
+if not st.session_state.name_submitted:
+
+    st.markdown(
+        """
+        <div class="name-container">
+            <div class="name-title">STATE YOUR NAME</div>
+            <div class="name-subtitle">
+                Before you enter the arena, the Capitol requires your identity.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    name = st.text_input(
+        "Your name",
+        key="name_input",
+        placeholder="Enter your name...",
+        label_visibility="collapsed"
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    if st.button("ENTER THE ARENA"):
+
+        entered_name = name.strip()
+
+        if not entered_name:
+            st.error("You must state your name before entering the arena.")
+            st.stop()
+
+        # ========================================================
+        # TRINAV CHECK
+        # Matches anything containing "trinav", case-insensitive.
+        # Examples: Trinav, TRINAV, trinav123, Trinav Talukdar
+        # ========================================================
+
+        if "trinav" in entered_name.lower():
+            st.error("you cannot play as me")
+            st.stop()
+
+        # ========================================================
+        # CHARACTER NAME CHECK
+        # Matches any possible result, case-insensitive.
+        # Examples: Katniss, KATNISS, katniss, Peeta, PEETA, etc.
+        # ========================================================
+
+        character_names = {
+            character.lower()
+            for character in CHARACTERS
+        }
+
+        if entered_name.lower() in character_names:
+            st.error("you think you can choose your own fate?")
+            st.stop()
+
+        # ========================================================
+        # VALID NAME
+        # ========================================================
+
+        st.session_state.name = entered_name
+        st.session_state.name_submitted = True
+        st.rerun()
+
+    st.stop()
 
 
 # ============================================================
@@ -741,3 +870,8 @@ st.markdown(
     '<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
     unsafe_allow_html=True
 )
+```
+
+One important detail: I interpreted **“any of the characters that can get from the quiz”** as the exact character names in `CHARACTERS`, case-insensitive. So `Katniss`, `KATNISS`, and `katniss` are blocked, but something like `Katniss123` is allowed.
+
+Also, I used `st.error(...)` + `st.stop()` rather than deliberately throwing a Python exception. That gives you the **crash/locked-out effect** visually without producing Streamlit's ugly generic error traceback.
