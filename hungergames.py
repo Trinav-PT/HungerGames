@@ -698,104 +698,104 @@ def determine_character(scores):
 # ============================================================
 def show_credits():
     st.markdown("""
-    <style>
-    .credits-wrapper {
-        height: 75vh;
-        overflow: hidden;
-        position: relative;
-        background: #000;
-        border-top: 3px solid #e6b84a;
-        border-bottom: 3px solid #9e2020;
+    <div style="
+        background: radial-gradient(circle at top, #0a0a0a, #000000);
+        border: 2px solid #e6b84a;
+        border-radius: 12px;
+        padding: 20px;
         margin: 1rem 0 2rem 0;
-    }
-    .credits-scroll {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        animation: scrollCredits 38s linear forwards;
-    }
-    @keyframes scrollCredits {
-        0%   { transform: translateY(100%); }
-        100% { transform: translateY(-120%); }
-    }
-    .credits-title {
-        font-family: 'Cinzel', serif;
-        font-size: 2.4rem;
-        color: #e6b84a;
-        letter-spacing: 6px;
-        margin-bottom: 3.5rem;
-        text-transform: uppercase;
-    }
-    .credits-section {
-        margin-bottom: 2.8rem;
-    }
-    .credits-role {
-        font-family: 'Cinzel', serif;
-        font-size: 0.95rem;
-        color: #888;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 0.4rem;
-    }
-    .credits-name {
-        font-family: 'Cinzel', serif;
-        font-size: 1.55rem;
+        box-shadow: 0 0 30px rgba(230, 184, 74, 0.15);
         color: #f1f1f1;
-        letter-spacing: 1px;
-    }
-    .credits-special {
         font-family: 'Cinzel', serif;
-        font-size: 1.15rem;
-        color: #e6b84a;
-        margin-top: 0.7rem;
-        letter-spacing: 1px;
-    }
-    .credits-secret {
-        font-family: 'Cinzel', serif;
-        font-size: 1.15rem;
-        color: #c52c2c;
-        margin-top: 4rem;
-        letter-spacing: 1px;
-        line-height: 1.6;
-    }
-    </style>
+        position: relative;
+        overflow: hidden;
+        min-height: 420px;
+    ">
+        <style>
+            @keyframes credit-scroll {
+                from { transform: translateY(100%); }
+                to   { transform: translateY(-130%); }
+            }
+            .credits-scroll {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                animation: credit-scroll 32s linear infinite;
+                text-align: center;
+            }
+            .credits-title {
+                font-size: 2.2rem;
+                color: #e6b84a;
+                letter-spacing: 5px;
+                margin-bottom: 2.8rem;
+                text-transform: uppercase;
+            }
+            .credit-line {
+                margin: 1.8rem 0;
+            }
+            .credit-role {
+                font-size: 0.95rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.3rem;
+            }
+            .credit-name {
+                font-size: 1.4rem;
+                color: #f1f1f1;
+                letter-spacing: 1px;
+            }
+            .credit-special {
+                font-size: 1.1rem;
+                color: #e6b84a;
+                margin-top: 0.5rem;
+            }
+            .credit-secret {
+                font-size: 1.1rem;
+                color: #c52c2c;
+                margin-top: 3rem;
+                letter-spacing: 1px;
+                line-height: 1.6;
+            }
+        </style>
 
-    <div class="credits-wrapper">
         <div class="credits-scroll">
             <div class="credits-title">CREDITS</div>
 
-            <div class="credits-section">
-                <div class="credits-role">Made with DETERMINATION by</div>
-                <div class="credits-name">members of The Spine</div>
-                <div class="credits-special">(watch till the end for secrets 👀)</div>
+            <div class="credit-line">
+                <div class="credit-role">Made with DETERMINATION by</div>
+                <div class="credit-name">members of The Spine</div>
+                <div class="credit-special">(watch till the end for secrets 👀)</div>
             </div>
 
-            <div class="credits-section">
-                <div class="credits-role">Questions Made by</div>
-                <div class="credits-name">Simran and Zaina</div>
+            <div class="credit-line">
+                <div class="credit-role">Questions Made by</div>
+                <div class="credit-name">Simran and Zaina</div>
             </div>
 
-            <div class="credits-section">
-                <div class="credits-role">Character Descs written by</div>
-                <div class="credits-name">Avani</div>
+            <div class="credit-line">
+                <div class="credit-role">Character Descs written by</div>
+                <div class="credit-name">Avani</div>
             </div>
 
-            <div class="credits-section">
-                <div class="credits-role">Site Dev and stupid Undertale references</div>
-                <div class="credits-name">Trinav</div>
+            <div class="credit-line">
+                <div class="credit-role">Site Dev and stupid Undertale references</div>
+                <div class="credit-name">Trinav</div>
             </div>
 
-            <div class="credits-section">
-                <div class="credits-role">Name you should not enter</div>
-                <div class="credits-name">Trinav</div>
+            <div class="credit-line">
+                <div class="credit-role">Name you should not enter</div>
+                <div class="credit-name">Trinav</div>
             </div>
 
-            <div class="credits-section">
-                <div class="credits-role">Name you should enter</div>
-                <div class="credits-name">Chewie</div>
+            <div class="credit-line">
+                <div class="credit-role">Name you should enter</div>
+                <div class="credit-name">Chewie</div>
             </div>
 
-            <div class="credits-secret">
+            <div class="credit-secret">
                 ...you really watched till the end?<br>
                 Respect.
             </div>
