@@ -697,59 +697,112 @@ def determine_character(scores):
 # CREDITS
 # ============================================================
 def show_credits():
-    st.markdown('<div class="credits-title">CREDITS</div>', unsafe_allow_html=True)
-
     st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Made with DETERMINATION by</div>
-        <div class="credits-name">members of The Spine</div>
-        <div class="credits-special">(watch till the end for secrets 👀)</div>
+    <style>
+    .credits-wrapper {
+        height: 75vh;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+        border-top: 3px solid #e6b84a;
+        border-bottom: 3px solid #9e2020;
+        margin: 1rem 0 2rem 0;
+    }
+    .credits-scroll {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        animation: scrollCredits 38s linear forwards;
+    }
+    @keyframes scrollCredits {
+        0%   { transform: translateY(100%); }
+        100% { transform: translateY(-120%); }
+    }
+    .credits-title {
+        font-family: 'Cinzel', serif;
+        font-size: 2.4rem;
+        color: #e6b84a;
+        letter-spacing: 6px;
+        margin-bottom: 3.5rem;
+        text-transform: uppercase;
+    }
+    .credits-section {
+        margin-bottom: 2.8rem;
+    }
+    .credits-role {
+        font-family: 'Cinzel', serif;
+        font-size: 0.95rem;
+        color: #888;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+    }
+    .credits-name {
+        font-family: 'Cinzel', serif;
+        font-size: 1.55rem;
+        color: #f1f1f1;
+        letter-spacing: 1px;
+    }
+    .credits-special {
+        font-family: 'Cinzel', serif;
+        font-size: 1.15rem;
+        color: #e6b84a;
+        margin-top: 0.7rem;
+        letter-spacing: 1px;
+    }
+    .credits-secret {
+        font-family: 'Cinzel', serif;
+        font-size: 1.15rem;
+        color: #c52c2c;
+        margin-top: 4rem;
+        letter-spacing: 1px;
+        line-height: 1.6;
+    }
+    </style>
+
+    <div class="credits-wrapper">
+        <div class="credits-scroll">
+            <div class="credits-title">CREDITS</div>
+
+            <div class="credits-section">
+                <div class="credits-role">Made with DETERMINATION by</div>
+                <div class="credits-name">members of The Spine</div>
+                <div class="credits-special">(watch till the end for secrets 👀)</div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-role">Questions Made by</div>
+                <div class="credits-name">Simran and Zaina</div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-role">Character Descs written by</div>
+                <div class="credits-name">Avani</div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-role">Site Dev and stupid Undertale references</div>
+                <div class="credits-name">Trinav</div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-role">Name you should not enter</div>
+                <div class="credits-name">Trinav</div>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-role">Name you should enter</div>
+                <div class="credits-name">Chewie</div>
+            </div>
+
+            <div class="credits-secret">
+                ...you really watched till the end?<br>
+                Respect.
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Questions Made by</div>
-        <div class="credits-name">Simran and Zaina</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Character Descs written by</div>
-        <div class="credits-name">Avani</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Site Dev and stupid Undertale references</div>
-        <div class="credits-name">Trinav</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Name you should not enter</div>
-        <div class="credits-name">Trinav</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="credits-section">
-        <div class="credits-role">Name you should enter</div>
-        <div class="credits-name">Chewie</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="credits-secret">
-        ...you really watched till the end?<br>
-        Respect.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("CLOSE CREDITS", use_container_width=True):
