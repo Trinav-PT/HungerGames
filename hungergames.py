@@ -957,7 +957,7 @@ def show_result():
         )
 
         for char, score in sorted_scores:
-            st.write(f"**{char}** — {score}")
+            st.write(f"**{char}** : {score}")
 
     st.markdown(
         "<br>",
