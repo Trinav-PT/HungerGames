@@ -24,7 +24,7 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
-chewie_base64 = get_base64_image("chewie.jpeg")
+chewie_base64 = get_base64_image("chewie.jpeg")   # fixed extension
 tf_base64 = get_base64_image("tf.gif")
 
 # ============================================================
@@ -272,10 +272,9 @@ div[data-testid="stRadio"] label p {
     filter: drop-shadow(0 0 12px rgba(220,80,20,0.35));
 }
 
-/* Percentage bars - clean single-line friendly */
 .pct-container {
     max-width: 720px;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1rem auto;
     padding: 1.8rem 2rem;
     background: #111111;
     border: 1px solid #3a3a3a;
@@ -371,7 +370,7 @@ CHARACTERS = [
 ]
 
 # ============================================================
-# ALL 9 QUESTIONS (4 HG + 5 original)
+# ALL 9 QUESTIONS
 # ============================================================
 QUESTIONS = [
     # ===== HUNGER GAMES QUESTIONS =====
@@ -731,38 +730,31 @@ def show_result():
         </div>
     """, unsafe_allow_html=True)
 
-    # ---------- FIXED PERCENTAGE BARS ----------
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("""
-        <div style="text-align:center;font-family:'Cinzel',serif;color:#e6b84a;font-size:1.35rem;letter-spacing:3px;margin-bottom:1.2rem;text-transform:uppercase;">
-            YOUR ALIGNMENT
-        </div>
-    """, unsafe_allow_html=True)
+    # ---------- ALIGNMENT STATS BEHIND EXPANDER ----------
+    with st.expander("VIEW ALIGNMENT"):
+        score_dict = dict(scores)
+        min_s = min(score_dict.values()) if score_dict else 0
+        shifted = {k: v - min_s for k, v in score_dict.items()}
+        total = sum(shifted.values()) or 1
 
-    score_dict = dict(scores)
-    min_s = min(score_dict.values()) if score_dict else 0
-    shifted = {k: v - min_s for k, v in score_dict.items()}
-    total = sum(shifted.values()) or 1
+        ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
 
-    ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
+        rows = []
+        for char, val in ranked:
+            pct = (val / total) * 100
+            if pct < 1.0:
+                continue
+            row = (
+                f'<div class="pct-row">'
+                f'<div class="pct-label">{char}</div>'
+                f'<div class="pct-bar-bg"><div class="pct-bar-fill" style="width:{pct:.1f}%;"></div></div>'
+                f'<div class="pct-value">{pct:.1f}%</div>'
+                f'</div>'
+            )
+            rows.append(row)
 
-    # Build clean HTML with NO leading indentation so Markdown doesn't treat it as code
-    rows = []
-    for char, val in ranked:
-        pct = (val / total) * 100
-        if pct < 1.0:
-            continue
-        row = (
-            f'<div class="pct-row">'
-            f'<div class="pct-label">{char}</div>'
-            f'<div class="pct-bar-bg"><div class="pct-bar-fill" style="width:{pct:.1f}%;"></div></div>'
-            f'<div class="pct-value">{pct:.1f}%</div>'
-            f'</div>'
-        )
-        rows.append(row)
-
-    bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
-    st.markdown(bars_html, unsafe_allow_html=True)
+        bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
+        st.markdown(bars_html, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
