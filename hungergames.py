@@ -340,16 +340,6 @@ div[data-testid="stRadio"] label p {
     margin-bottom: 2rem;
 }
 
-.name-error {
-    font-family: 'Cinzel', serif;
-    color: #c52c2c;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-align: center;
-    margin: 1.5rem 0;
-}
-
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -562,6 +552,9 @@ if "answers" not in st.session_state:
 if "finished" not in st.session_state:
     st.session_state.finished = False
 
+if "access_denied" not in st.session_state:
+    st.session_state.access_denied = False
+
 if "result" not in st.session_state:
     st.session_state.result = None
 
@@ -607,6 +600,60 @@ def determine_character(scores):
         return tied[0], tied
 
     return random.choice(tied), tied
+
+
+# ============================================================
+# ERROR PAGE VIEW
+# ============================================================
+
+def show_access_denied():
+    st.markdown(
+        """
+        <div class="shake-screen" style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            text-align: center;
+        ">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">⚠️</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                color: #c52c2c;
+                font-size: 2.5rem;
+                font-weight: 800;
+                letter-spacing: 4px;
+                margin-bottom: 1rem;
+            ">
+                ACCESS DENIED
+            </div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                color: #e6b84a;
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+                margin-bottom: 2rem;
+            ">
+                you cannot play as me
+            </div>
+            <div style="color: #888; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
+                The Capitol rejects this intrusion.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("RETURN TO REAPING"):
+            st.session_state.access_denied = False
+            st.session_state.name = ""
+            st.session_state.name_submitted = False
+            st.rerun()
 
 
 # ============================================================
@@ -699,6 +746,19 @@ st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 
 # ============================================================
+# ROUTING CONTROLS
+# ============================================================
+
+if st.session_state.access_denied:
+    show_access_denied()
+    st.stop()
+
+if st.session_state.finished:
+    show_result()
+    st.stop()
+
+
+# ============================================================
 # NAME CHECK
 # ============================================================
 
@@ -734,17 +794,12 @@ if not st.session_state.name_submitted:
             st.stop()
 
         # ========================================================
-        # TRINAV CHECK (WITH VIOLENT SCREEN SHAKE)
+        # TRINAV CHECK (TRIGGERS FULL ERROR PAGE)
         # ========================================================
 
         if "trinav" in entered_name.lower():
-            st.markdown(
-                '<div class="shake-screen">',
-                unsafe_allow_html=True
-            )
-            st.error("you cannot play as me")
-            st.markdown('</div>', unsafe_allow_html=True)
-            st.stop()
+            st.session_state.access_denied = True
+            st.rerun()
 
         # ========================================================
         # CHARACTER NAME CHECK
@@ -767,15 +822,6 @@ if not st.session_state.name_submitted:
         st.session_state.name_submitted = True
         st.rerun()
 
-    st.stop()
-
-
-# ============================================================
-# RESULT
-# ============================================================
-
-if st.session_state.finished:
-    show_result()
     st.stop()
 
 
