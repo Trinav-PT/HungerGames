@@ -7,7 +7,6 @@ import os
 # ============================================================
 # PAGE CONFIG
 # ============================================================
-
 st.set_page_config(
     page_title="WHO IS YOUR HUNGER GAMES CHARACTER?",
     page_icon="🔥",
@@ -18,7 +17,6 @@ st.set_page_config(
 # ============================================================
 # HELPER TO ENCODE BACKGROUND IMAGE
 # ============================================================
-
 def get_base64_image(image_path):
     if os.path.exists(image_path):
         with open(image_path, "rb") as img_file:
@@ -30,10 +28,8 @@ gaster_base64 = get_base64_image("gasterbg.jfif")
 # ============================================================
 # HUNGER GAMES INSPIRED STYLING
 # ============================================================
-
 st.markdown("""
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 html, body, [class*="css"] {
@@ -57,7 +53,6 @@ html, body, [class*="css"] {
 /* ============================================================
    SHAKE ANIMATION
    ============================================================ */
-
 @keyframes shake-violent {
   0% { transform: translate(0, 0) rotate(0deg); }
   10% { transform: translate(-15px, -10px) rotate(-3deg); }
@@ -79,7 +74,6 @@ html, body, [class*="css"] {
 /* ============================================================
    TITLE
    ============================================================ */
-
 .hg-title {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -120,7 +114,6 @@ html, body, [class*="css"] {
 /* ============================================================
    QUESTION CARD
    ============================================================ */
-
 .question-number {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -161,7 +154,6 @@ html, body, [class*="css"] {
 /* ============================================================
    ANSWERS
    ============================================================ */
-
 div[data-testid="stRadio"] > div {
     gap: 0.7rem;
 }
@@ -190,7 +182,6 @@ div[data-testid="stRadio"] label p {
 /* ============================================================
    BUTTONS
    ============================================================ */
-
 .stButton > button {
     width: 100%;
     background: linear-gradient(
@@ -223,7 +214,6 @@ div[data-testid="stRadio"] label p {
 /* ============================================================
    PROGRESS
    ============================================================ */
-
 .progress-label {
     text-align: center;
     font-size: 0.8rem;
@@ -254,7 +244,6 @@ div[data-testid="stRadio"] label p {
 /* ============================================================
    RESULT SCREEN
    ============================================================ */
-
 .result-container {
     text-align: center;
     padding: 2rem 1rem 3rem 1rem;
@@ -300,6 +289,23 @@ div[data-testid="stRadio"] label p {
         0 0 30px rgba(130,20,20,0.08);
 }
 
+.result-capitol {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #999;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.result-name {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #e6b84a;
+    margin: 1rem 0;
+    letter-spacing: 3px;
+}
+
 .result-score {
     color: #999999;
     font-size: 0.9rem;
@@ -316,7 +322,6 @@ div[data-testid="stRadio"] label p {
 /* ============================================================
    NAME SCREEN
    ============================================================ */
-
 .name-container {
     max-width: 650px;
     margin: 4rem auto;
@@ -357,7 +362,6 @@ div[data-testid="stRadio"] label p {
 /* ============================================================
    FOOTER
    ============================================================ */
-
 .hg-footer {
     text-align: center;
     color: #555555;
@@ -366,15 +370,12 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-top: 3rem;
 }
-
 </style>
 """, unsafe_allow_html=True)
-
 
 # ============================================================
 # CHARACTERS
 # ============================================================
-
 CHARACTERS = [
     "Katniss",
     "Peeta",
@@ -389,28 +390,19 @@ CHARACTERS = [
     "Effie"
 ]
 
-
 # ============================================================
 # QUESTIONS
 # ============================================================
-
 QUESTIONS = [
-
     {
         "question": """What are you most given to do if you have an upcoming test and wifi is down (for a long time)?""",
-
         "options": [
             """You take to the bulletin, cast rightful blame, and delineate how things haven’t been improving, as a quasi-productive way of procrastination""",
-
             """You already have the material downloaded, so it’s not of much consequence to you; you quietly get on while the rest scramble""",
-
             """You switch to mobile data and take a hedonistic deepdive into your internet recesses of choice till the wifi comes back on (and then procrastinate for “10 more minutes” after it comes back on)""",
-
             """You actively send your downloaded material on your class WhatsApp groups in this time of need, and prioritise sorting out people’s pre-test queries over locking in yourself""",
-
             """You sneakily sit on your downloaded material because you believe in taking all the advantages life hands you"""
         ],
-
         "scores": {
             "Katniss": [1, 3, 0, 1, -1],
             "Peeta": [0, 1, 0, 3, -2],
@@ -425,24 +417,16 @@ QUESTIONS = [
             "Effie": [1, 3, -1, 1, 1]
         }
     },
-
     {
         "question": """You have your D&I major project on your hands- what kind of teammate do you think you will be?""",
-
         "options": [
             """The one who attempts to do just as much as is required to be considered an ‘active contributor’ and save their score in the peer-grading""",
-
             """The one who considers themselves inexperienced and unskilled, but is there to learn and constructively contribute, and is unabashed about it""",
-
             """The one who somewhat does care about his grade, and his skillset, but just cannot be arsed""",
-
             """The one who quietly works on an important chunk of the project independently instead of being the supervisor or coordinator""",
-
             """The one who inevitably ends up organizing the group, dividing the work, setting deadlines, and chasing people""",
-
             """The “you don't sell the steak, you sell the sizzle” guy- you come up with the interesting angle, make the presentation compelling, and are the voice of the group"""
         ],
-
         "scores": {
             "Katniss": [1, 1, 0, 3, 1, 0],
             "Peeta": [-1, 3, 0, 1, 1, 3],
@@ -457,22 +441,15 @@ QUESTIONS = [
             "Effie": [1, 1, -1, 0, 3, 2]
         }
     },
-
     {
         "question": """You’re a sophomore, and the incoming batch has arrived. What kind of a senior are you to the new freshmen?""",
-
         "options": [
             """You’re pretty ambivalent about the whole “senior” thing- you’ll talk to them if the situation calls for it, but you won’t particularly seek them out or feel the need to establish yourself as a senior""",
-
             """You can’t wait to become a mentor or older-sibling-figure to them, and want to speak to as many as possible""",
-
             """You are somewhat looking forward to interacting with them, and would potentially like to be close to a few juniors who strike you as kindred""",
-
             """You want to be the cool senior that all the juniors know the name of, and admire from a distance""",
-
             """You’d like to be the cool senior too, but not at the cost of deep connection and proximity with the juniors"""
         ],
-
         "scores": {
             "Katniss": [3, 1, 2, -1, 1],
             "Peeta": [0, 3, 3, -1, 1],
@@ -487,24 +464,16 @@ QUESTIONS = [
             "Effie": [0, 2, 1, 3, 2]
         }
     },
-
     {
         "question": """It’s peak lunch hour in the mess, and you run into that senior who rejected you from their club, the ilgc teammate you’ve had a spat with, your ex-situationship, and your week 1 ‘friend’ you don’t talk to anymore, because Plaksha is the smallest godforsaken place on Earth; what do you do next?""",
-
         "options": [
             """You acknowledge everyone politely, act like nothing happened, and proceed with your lunch- you’re a chill dude""",
-
             """You make a banger joke about the sheer absurdity of all four of them being here at the same time, successfully break the tension for a second, and then have no idea what to do next""",
-
             """You assess the situation and talk to anyone if they’re worth engaging with- you don’t believe in severing ties for trifling reasons""",
-
             """You make no effort to hide the instinctual eyeroll, and sit on an empty seat confidently even if it’s close to them""",
-
             """You desert the social minefield immediately to go to Tonnies or skip lunch entirely""",
-
             """You try to break the ice with someone as you find it uncomfortable or unnecessary to awkwardly orbit a person you have interacted with in the past"""
         ],
-
         "scores": {
             "Katniss": [3, 1, 2, 3, 1, 1],
             "Peeta": [2, 3, 2, 0, -1, 3],
@@ -519,22 +488,15 @@ QUESTIONS = [
             "Effie": [3, 1, 3, 1, 1, 2]
         }
     },
-
     {
         "question": """What has been your personal strategy to grapple with the recent Plaksha mess scandals?""",
-
         "options": [
             """You’re a careful consumer who sifts through the food before eating it, but you cannot be arsed to find alternative sources of food 3 times a day""",
-
             """You’re also one of the mess regulars, but you don’t really think much about what could go wrong and are about that devil-may-care life""",
-
             """You order out quite often (not really because of safety concerns, but because concerned parents send you extra money for food, which you gladly accept)""",
-
             """You take to bulletin with evidence as a truly concerned member of the university, with sincere hopes that someone will bring about change""",
-
             """You actively suggest potential solutions and contact relevant authority members/ student activists to catalyse change firsthand"""
         ],
-
         "scores": {
             "Katniss": [3, 1, 1, 2, 3],
             "Peeta": [2, 0, 1, 3, 2],
@@ -549,77 +511,55 @@ QUESTIONS = [
             "Effie": [2, -1, 2, 3, 2]
         }
     }
-
 ]
-
 
 # ============================================================
 # SESSION STATE
 # ============================================================
-
 if "page" not in st.session_state:
     st.session_state.page = 0
-
 if "answers" not in st.session_state:
     st.session_state.answers = []
-
 if "finished" not in st.session_state:
     st.session_state.finished = False
-
 if "access_denied" not in st.session_state:
     st.session_state.access_denied = False
-
 if "result" not in st.session_state:
     st.session_state.result = None
-
 if "scores" not in st.session_state:
     st.session_state.scores = None
-
 if "name" not in st.session_state:
     st.session_state.name = ""
-
 if "name_submitted" not in st.session_state:
     st.session_state.name_submitted = False
-
 
 # ============================================================
 # SCORING
 # ============================================================
-
 def calculate_scores(answers):
     scores = Counter()
-
     for q_index, answer_index in enumerate(answers):
         question = QUESTIONS[q_index]
-
         for character in CHARACTERS:
             scores[character] += question["scores"][character][answer_index]
-
     return scores
-
 
 def determine_character(scores):
     if not scores:
         return None, []
-
     highest = max(scores.values())
-
     tied = [
         character
         for character, score in scores.items()
         if score == highest
     ]
-
     if len(tied) == 1:
         return tied[0], tied
-
     return random.choice(tied), tied
-
 
 # ============================================================
 # ERROR PAGE VIEW
 # ============================================================
-
 def show_access_denied():
     st.markdown(
         f"""
@@ -678,13 +618,10 @@ def show_access_denied():
             st.session_state.name_submitted = False
             st.rerun()
 
-
 # ============================================================
 # RESULT SCREEN
 # ============================================================
-
 def show_result():
-
     character = st.session_state.result
     scores = st.session_state.scores
 
@@ -699,30 +636,9 @@ def show_result():
     st.markdown(
         f"""
         <div class="result-card">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1rem;
-                color: #999;
-                letter-spacing: 4px;
-                text-transform: uppercase;
-            ">
-                THE CAPITOL HAS SPOKEN
-            </div>
-
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 3.5rem;
-                font-weight: 800;
-                color: #e6b84a;
-                margin: 1rem 0;
-                letter-spacing: 3px;
-            ">
-                {character.upper()}
-            </div>
-
-            <div class="result-score">
-                Final score: {scores[character]}
-            </div>
+            <div class="result-capitol">THE CAPITOL HAS SPOKEN</div>
+            <div class="result-name">{character.upper()}</div>
+            <div class="result-score">Final score: {scores[character]}</div>
         </div>
         """,
         unsafe_allow_html=True
@@ -734,7 +650,6 @@ def show_result():
             key=lambda x: x[1],
             reverse=True
         )
-
         for char, score in sorted_scores:
             st.write(f"**{char}** — {score}")
 
@@ -750,28 +665,22 @@ def show_result():
         st.session_state.name_submitted = False
         st.rerun()
 
-
 # ============================================================
 # MAIN HEADER
 # ============================================================
-
 st.markdown(
     '<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>',
     unsafe_allow_html=True
 )
-
 st.markdown(
     '<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
     unsafe_allow_html=True
 )
-
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-
 
 # ============================================================
 # ROUTING CONTROLS
 # ============================================================
-
 if st.session_state.access_denied:
     show_access_denied()
     st.stop()
@@ -780,13 +689,10 @@ if st.session_state.finished:
     show_result()
     st.stop()
 
-
 # ============================================================
 # NAME CHECK
 # ============================================================
-
 if not st.session_state.name_submitted:
-
     st.markdown(
         """
         <div class="name-container">
@@ -809,7 +715,6 @@ if not st.session_state.name_submitted:
     st.markdown("<br>", unsafe_allow_html=True)
 
     if st.button("ENTER THE ARENA"):
-
         entered_name = name.strip()
 
         if not entered_name:
@@ -819,7 +724,6 @@ if not st.session_state.name_submitted:
         # ========================================================
         # TRINAV CHECK (TRIGGERS FULL ERROR PAGE)
         # ========================================================
-
         if "trinav" in entered_name.lower():
             st.session_state.access_denied = True
             st.rerun()
@@ -827,7 +731,6 @@ if not st.session_state.name_submitted:
         # ========================================================
         # CHARACTER NAME CHECK
         # ========================================================
-
         character_names = {
             character.lower()
             for character in CHARACTERS
@@ -840,21 +743,17 @@ if not st.session_state.name_submitted:
         # ========================================================
         # VALID NAME
         # ========================================================
-
         st.session_state.name = entered_name
         st.session_state.name_submitted = True
         st.rerun()
 
     st.stop()
 
-
 # ============================================================
 # CURRENT QUESTION
 # ============================================================
-
 q_index = st.session_state.page
 question = QUESTIONS[q_index]
-
 total_questions = len(QUESTIONS)
 
 st.markdown(
@@ -863,7 +762,6 @@ st.markdown(
 )
 
 progress = (q_index + 1) / total_questions
-
 st.markdown(
     f"""
     <div class="progress-container">
@@ -883,11 +781,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 # ============================================================
 # ANSWERS
 # ============================================================
-
 option_labels = [
     f"{chr(65 + i)}. {option}"
     for i, option in enumerate(question["options"])
@@ -901,40 +797,29 @@ selected = st.radio(
     label_visibility="collapsed"
 )
 
-
 # ============================================================
 # NAVIGATION
 # ============================================================
-
 st.markdown("<br>", unsafe_allow_html=True)
 
 if selected is not None:
-
     selected_index = option_labels.index(selected)
 
     if q_index < total_questions - 1:
-
         if st.button("CONTINUE →"):
             st.session_state.answers.append(selected_index)
             st.session_state.page += 1
             st.rerun()
-
     else:
-
         if st.button("ENTER THE REAPING"):
             st.session_state.answers.append(selected_index)
-
             scores = calculate_scores(st.session_state.answers)
             character, tied = determine_character(scores)
-
             st.session_state.scores = scores
             st.session_state.result = character
             st.session_state.finished = True
-
             st.rerun()
-
 else:
-
     st.markdown(
         """
         <div style="
@@ -950,11 +835,9 @@ else:
         unsafe_allow_html=True
     )
 
-
 # ============================================================
 # FOOTER
 # ============================================================
-
 st.markdown(
     '<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
     unsafe_allow_html=True
