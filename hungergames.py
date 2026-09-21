@@ -609,6 +609,15 @@ def determine_character(scores):
 def show_access_denied():
     st.markdown(
         """
+        <style>
+        .stApp {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("app/static/gasterbg.jfif") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+        </style>
+        
         <div class="shake-screen" style="
             display: flex;
             flex-direction: column;
@@ -637,7 +646,7 @@ def show_access_denied():
             ">
                 you cannot play as me
             </div>
-            <div style="color: #888; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
+            <div style="color: #bbb; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
                 The Capitol rejects this intrusion.
             </div>
         </div>
