@@ -760,53 +760,142 @@ def determine_character(scores):
 # CREDITS (FIXED)
 # ============================================================
 def show_credits():
-    credits_html = """
-    <div class="credits-outer">
-        <div class="credits-scroll">
-            <div class="credits-title">CREDITS</div>
+    st.markdown("""
+    <div style="
+        max-width: 700px;
+        margin: 2rem auto 3rem auto;
+        padding: 3.5rem 2.5rem;
+        text-align: center;
+        background: radial-gradient(circle at top, #0a0a0a, #000000);
+        border: 2px solid #e6b84a;
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(230, 184, 74, 0.12);
+    ">
+        <div style="
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            color: #e6b84a;
+            letter-spacing: 6px;
+            margin-bottom: 3.5rem;
+            text-transform: uppercase;
+        ">CREDITS</div>
 
-            <div class="credit-line">
-                <div class="credit-role">Made with DETERMINATION by</div>
-                <div class="credit-name">members of The Spine</div>
-                <div class="credit-special">(watch till the end for secrets 👀)</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Made with DETERMINATION by</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.5rem;
+                color: #f1f1f1;
+                letter-spacing: 1px;
+            ">members of The Spine</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.05rem;
+                color: #e6b84a;
+                margin-top: 0.6rem;
+            ">(watch till the end for secrets 👀)</div>
+        </div>
 
-            <div class="credit-line">
-                <div class="credit-role">Questions Made by</div>
-                <div class="credit-name">Simran and Zaina</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Questions Made by</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.45rem;
+                color: #f1f1f1;
+            ">Simran and Zaina</div>
+        </div>
 
-            <div class="credit-line">
-                <div class="credit-role">Character Descs written by</div>
-                <div class="credit-name">Avani</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Character Descs written by</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.45rem;
+                color: #f1f1f1;
+            ">Avani</div>
+        </div>
 
-            <div class="credit-line">
-                <div class="credit-role">Site Dev and stupid Undertale references</div>
-                <div class="credit-name">Trinav</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Site Dev and stupid Undertale references</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.45rem;
+                color: #f1f1f1;
+            ">Trinav</div>
+        </div>
 
-            <div class="credit-line">
-                <div class="credit-role">Name you should not enter</div>
-                <div class="credit-name">Trinav</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Name you should not enter</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.45rem;
+                color: #f1f1f1;
+            ">Trinav</div>
+        </div>
 
-            <div class="credit-line">
-                <div class="credit-role">Name you should enter</div>
-                <div class="credit-name">Chewie</div>
-            </div>
+        <div style="margin-bottom: 2.8rem;">
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #888;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            ">Name you should enter</div>
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1.45rem;
+                color: #f1f1f1;
+            ">Chewie</div>
+        </div>
 
-            <div class="credit-secret">
-                ...you really watched till the end?<br>
-                Respect.
-            </div>
+        <div style="
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: #c52c2c;
+            margin-top: 3.5rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        ">
+            ...you really watched till the end?<br>
+            Respect.
         </div>
     </div>
-    """
-
-    # Use components.html for reliable rendering of complex HTML + CSS animation
-    import streamlit.components.v1 as components
-    components.html(credits_html, height=520, scrolling=False)
+    """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
