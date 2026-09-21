@@ -24,6 +24,8 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
+chewie_base64 = get_base64_image("chewie.jpg")
+tf_base64 = get_base64_image("tf.gif")
 
 # ============================================================
 # HUNGER GAMES INSPIRED STYLING
@@ -69,6 +71,28 @@ html, body, [class*="css"] {
 
 .shake-screen {
   animation: shake-violent 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* ============================================================
+   CHEWIE SPIN ANIMATION
+   ============================================================ */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinning-chewie {
+  animation: spin 2.5s linear infinite;
+  width: 320px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+}
+
+.tf-gif {
+  width: 320px;
+  height: auto;
+  border-radius: 12px;
 }
 
 /* ============================================================
@@ -524,6 +548,8 @@ if "finished" not in st.session_state:
     st.session_state.finished = False
 if "access_denied" not in st.session_state:
     st.session_state.access_denied = False
+if "chewie_mode" not in st.session_state:
+    st.session_state.chewie_mode = False
 if "result" not in st.session_state:
     st.session_state.result = None
 if "scores" not in st.session_state:
@@ -619,6 +645,55 @@ def show_access_denied():
             st.rerun()
 
 # ============================================================
+# CHEWIE MODE
+# ============================================================
+def show_chewie():
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background: #000000 !important;
+        }}
+        .block-container {{
+            max-width: 100% !important;
+            padding-top: 0 !important;
+        }}
+        </style>
+
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 85vh;
+            gap: 2.5rem;
+        ">
+            <div style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4rem;
+                flex-wrap: wrap;
+            ">
+                <img src="data:image/jpeg;base64,{chewie_base64}" class="spinning-chewie" alt="Chewie">
+                <img src="data:image/gif;base64,{tf_base64}" class="tf-gif" alt="TF">
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("RETURN TO REAPING"):
+            st.session_state.chewie_mode = False
+            st.session_state.name = ""
+            st.session_state.name_submitted = False
+            st.rerun()
+
+# ============================================================
 # RESULT SCREEN
 # ============================================================
 def show_result():
@@ -685,6 +760,10 @@ if st.session_state.access_denied:
     show_access_denied()
     st.stop()
 
+if st.session_state.chewie_mode:
+    show_chewie()
+    st.stop()
+
 if st.session_state.finished:
     show_result()
     st.stop()
@@ -729,6 +808,13 @@ if not st.session_state.name_submitted:
             st.rerun()
 
         # ========================================================
+        # CHEWIE CHECK
+        # ========================================================
+        if "chewie" in entered_name.lower():
+            st.session_state.chewie_mode = True
+            st.rerun()
+
+        # ========================================================
         # CHARACTER NAME CHECK
         # ========================================================
         character_names = {
@@ -737,7 +823,7 @@ if not st.session_state.name_submitted:
         }
 
         if entered_name.lower() in character_names:
-            st.error("you think you can choose your own fate?")
+            st.error("You think you can choose your own fate?")
             st.stop()
 
         # ========================================================
