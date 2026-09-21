@@ -41,6 +41,28 @@ html, body, [class*="css"] {
 }
 
 /* ============================================================
+   SHAKE ANIMATION
+   ============================================================ */
+
+@keyframes shake-violent {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-15px, -10px) rotate(-3deg); }
+  20% { transform: translate(15px, 8px) rotate(3deg); }
+  30% { transform: translate(-12px, 12px) rotate(-2deg); }
+  40% { transform: translate(12px, -8px) rotate(2deg); }
+  50% { transform: translate(-15px, 5px) rotate(-3deg); }
+  60% { transform: translate(10px, -12px) rotate(2deg); }
+  70% { transform: translate(-10px, 10px) rotate(-1deg); }
+  80% { transform: translate(8px, -5px) rotate(1deg); }
+  90% { transform: translate(-5px, 8px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.shake-screen {
+  animation: shake-violent 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* ============================================================
    TITLE
    ============================================================ */
 
@@ -584,8 +606,6 @@ def determine_character(scores):
     if len(tied) == 1:
         return tied[0], tied
 
-    # Same tie logic as the Sorting Hat app:
-    # randomly choose between the characters tied for first.
     return random.choice(tied), tied
 
 
@@ -714,19 +734,20 @@ if not st.session_state.name_submitted:
             st.stop()
 
         # ========================================================
-        # TRINAV CHECK
-        # Matches anything containing "trinav", case-insensitive.
-        # Examples: Trinav, TRINAV, trinav123, Trinav Talukdar
+        # TRINAV CHECK (WITH VIOLENT SCREEN SHAKE)
         # ========================================================
 
         if "trinav" in entered_name.lower():
+            st.markdown(
+                '<div class="shake-screen">',
+                unsafe_allow_html=True
+            )
             st.error("you cannot play as me")
+            st.markdown('</div>', unsafe_allow_html=True)
             st.stop()
 
         # ========================================================
         # CHARACTER NAME CHECK
-        # Matches any possible result, case-insensitive.
-        # Examples: Katniss, KATNISS, katniss, Peeta, PEETA, etc.
         # ========================================================
 
         character_names = {
