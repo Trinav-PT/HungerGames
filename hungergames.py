@@ -24,7 +24,7 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
-chewie_base64 = get_base64_image("chewie.jpeg")
+chewie_base64 = get_base64_image("chewie.jpg")
 tf_base64 = get_base64_image("tf.gif")
 
 # ============================================================
@@ -45,16 +45,12 @@ html, body, [class*="css"] {
     color: #eeeeee;
 }
 
-/* Remove Streamlit top padding */
 .block-container {
     padding-top: 2rem;
     padding-bottom: 4rem;
     max-width: 1050px;
 }
 
-/* ============================================================
-   SHAKE ANIMATION
-   ============================================================ */
 @keyframes shake-violent {
   0% { transform: translate(0, 0) rotate(0deg); }
   10% { transform: translate(-15px, -10px) rotate(-3deg); }
@@ -73,9 +69,6 @@ html, body, [class*="css"] {
   animation: shake-violent 0.4s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-/* ============================================================
-   CHEWIE SPIN ANIMATION
-   ============================================================ */
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -95,9 +88,6 @@ html, body, [class*="css"] {
   border-radius: 12px;
 }
 
-/* ============================================================
-   TITLE
-   ============================================================ */
 .hg-title {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -125,19 +115,9 @@ html, body, [class*="css"] {
     width: 70%;
     height: 1px;
     margin: 1.5rem auto 2rem auto;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        #a91d1d,
-        #e6b84a,
-        #a91d1d,
-        transparent
-    );
+    background: linear-gradient(90deg, transparent, #a91d1d, #e6b84a, #a91d1d, transparent);
 }
 
-/* ============================================================
-   QUESTION CARD
-   ============================================================ */
 .question-number {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -159,25 +139,6 @@ html, body, [class*="css"] {
     max-width: 900px;
 }
 
-.question-card {
-    background: linear-gradient(
-        145deg,
-        rgba(35,35,35,0.95),
-        rgba(14,14,14,0.98)
-    );
-    border: 1px solid #393939;
-    border-top: 2px solid #9e2020;
-    border-bottom: 2px solid #9e2020;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow:
-        0 10px 35px rgba(0,0,0,0.55),
-        inset 0 0 35px rgba(120,20,20,0.04);
-}
-
-/* ============================================================
-   ANSWERS
-   ============================================================ */
 div[data-testid="stRadio"] > div {
     gap: 0.7rem;
 }
@@ -203,16 +164,9 @@ div[data-testid="stRadio"] label p {
     line-height: 1.5 !important;
 }
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
 .stButton > button {
     width: 100%;
-    background: linear-gradient(
-        180deg,
-        #a32626,
-        #721515
-    );
+    background: linear-gradient(180deg, #a32626, #721515);
     color: white;
     border: 1px solid #c33a3a;
     border-radius: 2px;
@@ -225,19 +179,12 @@ div[data-testid="stRadio"] label p {
 }
 
 .stButton > button:hover {
-    background: linear-gradient(
-        180deg,
-        #c33232,
-        #8b1919
-    );
+    background: linear-gradient(180deg, #c33232, #8b1919);
     border-color: #e6b84a;
     box-shadow: 0 0 18px rgba(190,35,35,0.35);
     color: white;
 }
 
-/* ============================================================
-   PROGRESS
-   ============================================================ */
 .progress-label {
     text-align: center;
     font-size: 0.8rem;
@@ -256,18 +203,10 @@ div[data-testid="stRadio"] label p {
 
 .progress-bar {
     height: 5px;
-    background: linear-gradient(
-        90deg,
-        #781717,
-        #d29a32,
-        #e6b84a
-    );
+    background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
     box-shadow: 0 0 8px rgba(230,184,74,0.35);
 }
 
-/* ============================================================
-   RESULT SCREEN
-   ============================================================ */
 .result-container {
     text-align: center;
     padding: 2rem 1rem 3rem 1rem;
@@ -289,28 +228,18 @@ div[data-testid="stRadio"] label p {
     font-weight: 800;
     letter-spacing: 5px;
     margin: 1rem 0;
-    text-shadow:
-        0 0 15px rgba(230,184,74,0.3),
-        0 0 35px rgba(150,20,20,0.2);
+    text-shadow: 0 0 15px rgba(230,184,74,0.3), 0 0 35px rgba(150,20,20,0.2);
 }
 
 .result-card {
     max-width: 750px;
     margin: 2rem auto;
     padding: 3rem 2rem;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(150,25,25,0.13),
-            transparent 65%
-        ),
-        #111111;
+    background: radial-gradient(circle at center, rgba(150,25,25,0.13), transparent 65%), #111111;
     border: 1px solid #4b4b4b;
     border-top: 3px solid #e6b84a;
     border-bottom: 3px solid #9e2020;
-    box-shadow:
-        0 15px 50px rgba(0,0,0,0.65),
-        0 0 30px rgba(130,20,20,0.08);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
 }
 
 .result-capitol {
@@ -343,11 +272,11 @@ div[data-testid="stRadio"] label p {
     filter: drop-shadow(0 0 12px rgba(220,80,20,0.35));
 }
 
-/* Percentage bars */
+/* Percentage bars - clean single-line friendly */
 .pct-container {
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto 2rem auto;
-    padding: 1.5rem 2rem;
+    padding: 1.8rem 2rem;
     background: #111111;
     border: 1px solid #3a3a3a;
     border-top: 2px solid #e6b84a;
@@ -356,7 +285,7 @@ div[data-testid="stRadio"] label p {
 .pct-row {
     display: flex;
     align-items: center;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.15rem;
 }
 
 .pct-label {
@@ -365,6 +294,7 @@ div[data-testid="stRadio"] label p {
     font-size: 0.95rem;
     color: #e6b84a;
     letter-spacing: 1px;
+    flex-shrink: 0;
 }
 
 .pct-bar-bg {
@@ -373,7 +303,7 @@ div[data-testid="stRadio"] label p {
     background: #1e1e1e;
     border-radius: 2px;
     overflow: hidden;
-    margin: 0 12px;
+    margin: 0 14px;
 }
 
 .pct-bar-fill {
@@ -383,34 +313,24 @@ div[data-testid="stRadio"] label p {
 }
 
 .pct-value {
-    width: 55px;
+    width: 58px;
     text-align: right;
     font-size: 0.9rem;
     color: #ccc;
     font-family: 'Cinzel', serif;
+    flex-shrink: 0;
 }
 
-/* ============================================================
-   NAME SCREEN
-   ============================================================ */
 .name-container {
     max-width: 650px;
     margin: 4rem auto;
     padding: 3rem 2.5rem;
     text-align: center;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(150,25,25,0.12),
-            transparent 70%
-        ),
-        #111111;
+    background: radial-gradient(circle at center, rgba(150,25,25,0.12), transparent 70%), #111111;
     border: 1px solid #4b4b4b;
     border-top: 3px solid #e6b84a;
     border-bottom: 3px solid #9e2020;
-    box-shadow:
-        0 15px 50px rgba(0,0,0,0.65),
-        0 0 30px rgba(130,20,20,0.08);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
 }
 
 .name-title {
@@ -430,9 +350,6 @@ div[data-testid="stRadio"] label p {
     margin-bottom: 2rem;
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 .hg-footer {
     text-align: center;
     color: #555555;
@@ -448,27 +365,16 @@ div[data-testid="stRadio"] label p {
 # CHARACTERS
 # ============================================================
 CHARACTERS = [
-    "Katniss",
-    "Peeta",
-    "Gale",
-    "Haymitch",
-    "Prim",
-    "Finnick",
-    "Rue",
-    "Snow",
-    "Cinna",
-    "Johanna",
-    "Effie",
-    "Plutarch",
-    "Foxface",
-    "Beetee"
+    "Katniss", "Peeta", "Gale", "Haymitch", "Prim", "Finnick",
+    "Rue", "Snow", "Cinna", "Johanna", "Effie",
+    "Plutarch", "Foxface", "Beetee"
 ]
 
 # ============================================================
-# QUESTIONS (NEW SET)
+# ALL 9 QUESTIONS (4 HG + 5 original)
 # ============================================================
 QUESTIONS = [
-    # QUESTION 1
+    # ===== HUNGER GAMES QUESTIONS =====
     {
         "question": "You're on the Capitol train and dinner arrives. There are approximately 47 dishes in front of you. You have no idea what half of them are.",
         "options": [
@@ -495,7 +401,6 @@ QUESTIONS = [
             "Beetee":   [0, 0, 0, 1, 0]
         }
     },
-    # QUESTION 2
     {
         "question": "You discover your alliance has been stealing your food. What do you do?",
         "options": [
@@ -523,7 +428,6 @@ QUESTIONS = [
             "Beetee":   [0, 0, 0, 0, 0, 0]
         }
     },
-    # QUESTION 4
     {
         "question": "You're given 30 seconds at the Cornucopia. What are you taking?",
         "options": [
@@ -551,7 +455,6 @@ QUESTIONS = [
             "Beetee":   [0, 0, 0, 0, 0, 3]
         }
     },
-    # QUESTION 5
     {
         "question": "You have one hour to prepare for the arena. What are you doing?",
         "options": [
@@ -577,6 +480,140 @@ QUESTIONS = [
             "Plutarch": [2, 0, 2, 0, 0, 0],
             "Foxface":  [0, 0, 0, 0, 2, 0],
             "Beetee":   [3, 0, 0, 0, 3, 0]
+        }
+    },
+
+    # ===== ORIGINAL PLAKSHA QUESTIONS =====
+    {
+        "question": "What are you most given to do if you have an upcoming test and wifi is down (for a long time)?",
+        "options": [
+            "You take to the bulletin, cast rightful blame, and delineate how things haven’t been improving, as a quasi-productive way of procrastination",
+            "You already have the material downloaded, so it’s not of much consequence to you; you quietly get on while the rest scramble",
+            "You switch to mobile data and take a hedonistic deepdive into your internet recesses of choice till the wifi comes back on (and then procrastinate for “10 more minutes” after it comes back on)",
+            "You actively send your downloaded material on your class WhatsApp groups in this time of need, and prioritise sorting out people’s pre-test queries over locking in yourself",
+            "You sneakily sit on your downloaded material because you believe in taking all the advantages life hands you"
+        ],
+        "scores": {
+            "Katniss":  [1, 3, 0, 1, -1],
+            "Peeta":    [0, 1, 0, 3, -2],
+            "Gale":     [3, 1, 0, 1, 2],
+            "Haymitch": [2, 2, 3, 0, 1],
+            "Prim":     [0, 2, 0, 3, -2],
+            "Finnick":  [0, 1, 3, 2, 1],
+            "Rue":      [1, 3, 1, 2, -1],
+            "Snow":     [1, 1, 0, -1, 3],
+            "Cinna":    [0, 2, 0, 2, -1],
+            "Johanna":  [2, 0, 1, 0, 2],
+            "Effie":    [1, 3, -1, 1, 1],
+            "Plutarch": [0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0]
+        }
+    },
+    {
+        "question": "You have your D&I major project on your hands — what kind of teammate do you think you will be?",
+        "options": [
+            "The one who attempts to do just as much as is required to be considered an ‘active contributor’ and save their score in the peer-grading",
+            "The one who considers themselves inexperienced and unskilled, but is there to learn and constructively contribute, and is unabashed about it",
+            "The one who somewhat does care about his grade, and his skillset, but just cannot be arsed",
+            "The one who quietly works on an important chunk of the project independently instead of being the supervisor or coordinator",
+            "The one who inevitably ends up organizing the group, dividing the work, setting deadlines, and chasing people",
+            "The “you don't sell the steak, you sell the sizzle” guy — you come up with the interesting angle, make the presentation compelling, and are the voice of the group"
+        ],
+        "scores": {
+            "Katniss":  [1, 1, 0, 3, 1, 0],
+            "Peeta":    [-1, 3, 0, 1, 1, 3],
+            "Gale":     [1, 1, 0, 2, 3, 2],
+            "Haymitch": [3, 0, 3, 1, 1, 1],
+            "Prim":     [-1, 3, 0, 1, 1, 2],
+            "Finnick":  [1, 1, 2, 0, 1, 3],
+            "Rue":      [1, 3, 1, 2, 1, 1],
+            "Snow":     [3, -1, 1, 1, 3, 2],
+            "Cinna":    [0, 2, 0, 3, 1, 3],
+            "Johanna":  [3, 0, 2, 2, 1, 1],
+            "Effie":    [1, 1, -1, 0, 3, 2],
+            "Plutarch": [0, 0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0, 0]
+        }
+    },
+    {
+        "question": "You’re a sophomore, and the incoming batch has arrived. What kind of a senior are you to the new freshmen?",
+        "options": [
+            "You’re pretty ambivalent about the whole “senior” thing — you’ll talk to them if the situation calls for it, but you won’t particularly seek them out or feel the need to establish yourself as a senior",
+            "You can’t wait to become a mentor or older-sibling-figure to them, and want to speak to as many as possible",
+            "You are somewhat looking forward to interacting with them, and would potentially like to be close to a few juniors who strike you as kindred",
+            "You want to be the cool senior that all the juniors know the name of, and admire from a distance",
+            "You’d like to be the cool senior too, but not at the cost of deep connection and proximity with the juniors"
+        ],
+        "scores": {
+            "Katniss":  [3, 1, 2, -1, 1],
+            "Peeta":    [0, 3, 3, -1, 1],
+            "Gale":     [2, 1, 2, 1, 3],
+            "Haymitch": [3, -1, 1, 0, -1],
+            "Prim":     [1, 3, 3, -1, 1],
+            "Finnick":  [0, 2, 2, 3, 3],
+            "Rue":      [2, 2, 3, -1, 1],
+            "Snow":     [1, -1, 0, 3, 2],
+            "Cinna":    [2, 1, 2, 1, 3],
+            "Johanna":  [3, -1, 1, 2, 0],
+            "Effie":    [0, 2, 1, 3, 2],
+            "Plutarch": [0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0]
+        }
+    },
+    {
+        "question": "It’s peak lunch hour in the mess, and you run into that senior who rejected you from their club, the ilgc teammate you’ve had a spat with, your ex-situationship, and your week 1 ‘friend’ you don’t talk to anymore, because Plaksha is the smallest godforsaken place on Earth; what do you do next?",
+        "options": [
+            "You acknowledge everyone politely, act like nothing happened, and proceed with your lunch — you’re a chill dude",
+            "You make a banger joke about the sheer absurdity of all four of them being here at the same time, successfully break the tension for a second, and then have no idea what to do next",
+            "You assess the situation and talk to anyone if they’re worth engaging with — you don’t believe in severing ties for trifling reasons",
+            "You make no effort to hide the instinctual eyeroll, and sit on an empty seat confidently even if it’s close to them",
+            "You desert the social minefield immediately to go to Tonnies or skip lunch entirely",
+            "You try to break the ice with someone as you find it uncomfortable or unnecessary to awkwardly orbit a person you have interacted with in the past"
+        ],
+        "scores": {
+            "Katniss":  [3, 1, 2, 3, 1, 1],
+            "Peeta":    [2, 3, 2, 0, -1, 3],
+            "Gale":     [2, 1, 3, 2, 0, 1],
+            "Haymitch": [3, 3, 2, 1, 2, -1],
+            "Prim":     [3, 1, 2, 0, -1, 3],
+            "Finnick":  [3, 3, 2, 2, 1, 3],
+            "Rue":      [3, 1, 2, 1, 2, 1],
+            "Snow":     [3, 1, 3, 2, 0, 1],
+            "Cinna":    [3, 2, 2, 1, 1, 3],
+            "Johanna":  [1, 3, 2, 3, 2, 1],
+            "Effie":    [3, 1, 3, 1, 1, 2],
+            "Plutarch": [0, 0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0, 0]
+        }
+    },
+    {
+        "question": "What has been your personal strategy to grapple with the recent Plaksha mess scandals?",
+        "options": [
+            "You’re a careful consumer who sifts through the food before eating it, but you cannot be arsed to find alternative sources of food 3 times a day",
+            "You’re also one of the mess regulars, but you don’t really think much about what could go wrong and are about that devil-may-care life",
+            "You order out quite often (not really because of safety concerns, but because concerned parents send you extra money for food, which you gladly accept)",
+            "You take to bulletin with evidence as a truly concerned member of the university, with sincere hopes that someone will bring about change",
+            "You actively suggest potential solutions and contact relevant authority members / student activists to catalyse change firsthand"
+        ],
+        "scores": {
+            "Katniss":  [3, 1, 1, 2, 3],
+            "Peeta":    [2, 0, 1, 3, 2],
+            "Gale":     [1, 0, 1, 3, 3],
+            "Haymitch": [2, 3, 2, 1, 1],
+            "Prim":     [3, -1, 1, 3, 2],
+            "Finnick":  [1, 2, 3, 1, 2],
+            "Rue":      [3, 1, 1, 2, 2],
+            "Snow":     [2, 1, 3, 2, 3],
+            "Cinna":    [1, 0, 1, 3, 3],
+            "Johanna":  [1, 2, 1, 3, 2],
+            "Effie":    [2, -1, 2, 3, 2],
+            "Plutarch": [0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0]
         }
     }
 ]
@@ -618,21 +655,16 @@ def determine_character(scores):
     if not scores:
         return None, []
     highest = max(scores.values())
-    tied = [
-        character
-        for character, score in scores.items()
-        if score == highest
-    ]
+    tied = [c for c, s in scores.items() if s == highest]
     if len(tied) == 1:
         return tied[0], tied
     return random.choice(tied), tied
 
 # ============================================================
-# ERROR PAGE VIEW
+# ERROR / CHEWIE / RESULT VIEWS
 # ============================================================
 def show_access_denied():
-    st.markdown(
-        f"""
+    st.markdown(f"""
         <style>
         .stApp {{
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("data:image/jfif;base64,{gaster_base64}") !important;
@@ -641,45 +673,14 @@ def show_access_denied():
             background-repeat: no-repeat !important;
         }}
         </style>
-        
-        <div class="shake-screen" style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 60vh;
-            text-align: center;
-        ">
-            <div style="font-size: 5rem; margin-bottom: 1rem;">⚠️</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                color: #c52c2c;
-                font-size: 2.5rem;
-                font-weight: 800;
-                letter-spacing: 4px;
-                margin-bottom: 1rem;
-            ">
-                ACCESS DENIED
-            </div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                color: #e6b84a;
-                font-size: 1.4rem;
-                letter-spacing: 2px;
-                margin-bottom: 2rem;
-            ">
-                you cannot play as me
-            </div>
-            <div style="color: #bbb; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
-                The Capitol rejects this intrusion.
-            </div>
+        <div class="shake-screen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;text-align:center;">
+            <div style="font-size:5rem;margin-bottom:1rem;">⚠️</div>
+            <div style="font-family:'Cinzel',serif;color:#c52c2c;font-size:2.5rem;font-weight:800;letter-spacing:4px;margin-bottom:1rem;">ACCESS DENIED</div>
+            <div style="font-family:'Cinzel',serif;color:#e6b84a;font-size:1.4rem;letter-spacing:2px;margin-bottom:2rem;">you cannot play as me</div>
+            <div style="color:#bbb;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;">The Capitol rejects this intrusion.</div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
-    
+    """, unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
-    
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("RETURN TO REAPING"):
@@ -688,47 +689,20 @@ def show_access_denied():
             st.session_state.name_submitted = False
             st.rerun()
 
-# ============================================================
-# CHEWIE MODE
-# ============================================================
 def show_chewie():
-    st.markdown(
-        f"""
+    st.markdown(f"""
         <style>
-        .stApp {{
-            background: #000000 !important;
-        }}
-        .block-container {{
-            max-width: 100% !important;
-            padding-top: 0 !important;
-        }}
+        .stApp {{ background: #000000 !important; }}
+        .block-container {{ max-width: 100% !important; padding-top: 0 !important; }}
         </style>
-
-        <div style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 85vh;
-            gap: 2.5rem;
-        ">
-            <div style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 4rem;
-                flex-wrap: wrap;
-            ">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:85vh;gap:2.5rem;">
+            <div style="display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap;">
                 <img src="data:image/jpeg;base64,{chewie_base64}" class="spinning-chewie" alt="Chewie">
                 <img src="data:image/gif;base64,{tf_base64}" class="tf-gif" alt="TF">
             </div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
-
+    """, unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
-
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("RETURN TO REAPING"):
@@ -737,9 +711,6 @@ def show_chewie():
             st.session_state.name_submitted = False
             st.rerun()
 
-# ============================================================
-# RESULT SCREEN
-# ============================================================
 def show_result():
     character = st.session_state.result
     scores = st.session_state.scores
@@ -752,61 +723,45 @@ def show_result():
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown(
-        f"""
+    st.markdown(f"""
         <div class="result-card">
             <div class="result-capitol">THE CAPITOL HAS SPOKEN</div>
             <div class="result-name">{character.upper()}</div>
             <div class="result-score">Final score: {scores[character]}</div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """, unsafe_allow_html=True)
 
-    # ---------- STYLISED PERCENTAGE BREAKDOWN (no plotly) ----------
+    # ---------- FIXED PERCENTAGE BARS ----------
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            color: #e6b84a;
-            font-size: 1.35rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.2rem;
-            text-transform: uppercase;
-        ">
+    st.markdown("""
+        <div style="text-align:center;font-family:'Cinzel',serif;color:#e6b84a;font-size:1.35rem;letter-spacing:3px;margin-bottom:1.2rem;text-transform:uppercase;">
             YOUR ALIGNMENT
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """, unsafe_allow_html=True)
 
-    # Convert scores to percentages (shift so all ≥ 0)
     score_dict = dict(scores)
     min_s = min(score_dict.values()) if score_dict else 0
     shifted = {k: v - min_s for k, v in score_dict.items()}
     total = sum(shifted.values()) or 1
 
-    # Sort and keep meaningful ones
     ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
 
-    bars_html = '<div class="pct-container">'
+    # Build clean HTML with NO leading indentation so Markdown doesn't treat it as code
+    rows = []
     for char, val in ranked:
         pct = (val / total) * 100
         if pct < 1.0:
             continue
-        bars_html += f'''
-        <div class="pct-row">
-            <div class="pct-label">{char}</div>
-            <div class="pct-bar-bg">
-                <div class="pct-bar-fill" style="width: {pct}%;"></div>
-            </div>
-            <div class="pct-value">{pct:.1f}%</div>
-        </div>
-        '''
-    bars_html += '</div>'
+        row = (
+            f'<div class="pct-row">'
+            f'<div class="pct-label">{char}</div>'
+            f'<div class="pct-bar-bg"><div class="pct-bar-fill" style="width:{pct:.1f}%;"></div></div>'
+            f'<div class="pct-value">{pct:.1f}%</div>'
+            f'</div>'
+        )
+        rows.append(row)
 
+    bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
     st.markdown(bars_html, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -824,18 +779,12 @@ def show_result():
 # ============================================================
 # MAIN HEADER
 # ============================================================
-st.markdown(
-    '<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>',
-    unsafe_allow_html=True
-)
-st.markdown(
-    '<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
-    unsafe_allow_html=True
-)
+st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
+st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # ============================================================
-# ROUTING CONTROLS
+# ROUTING
 # ============================================================
 if st.session_state.access_denied:
     show_access_denied()
@@ -853,30 +802,18 @@ if st.session_state.finished:
 # NAME CHECK
 # ============================================================
 if not st.session_state.name_submitted:
-    st.markdown(
-        """
+    st.markdown("""
         <div class="name-container">
             <div class="name-title">STATE YOUR NAME</div>
-            <div class="name-subtitle">
-                Before you enter the arena, the Capitol requires your identity.
-            </div>
+            <div class="name-subtitle">Before you enter the arena, the Capitol requires your identity.</div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """, unsafe_allow_html=True)
 
-    name = st.text_input(
-        "Your name",
-        key="name_input",
-        placeholder="Enter your name...",
-        label_visibility="collapsed"
-    )
-
+    name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
     st.markdown("<br>", unsafe_allow_html=True)
 
     if st.button("ENTER THE ARENA"):
         entered_name = name.strip()
-
         if not entered_name:
             st.error("You must state your name before entering the arena.")
             st.stop()
@@ -889,15 +826,13 @@ if not st.session_state.name_submitted:
             st.session_state.chewie_mode = True
             st.rerun()
 
-        character_names = {character.lower() for character in CHARACTERS}
-        if entered_name.lower() in character_names:
+        if entered_name.lower() in {c.lower() for c in CHARACTERS}:
             st.error("you think you can choose your own fate?")
             st.stop()
 
         st.session_state.name = entered_name
         st.session_state.name_submitted = True
         st.rerun()
-
     st.stop()
 
 # ============================================================
@@ -907,55 +842,25 @@ q_index = st.session_state.page
 question = QUESTIONS[q_index]
 total_questions = len(QUESTIONS)
 
-st.markdown(
-    f'<div class="progress-label">Question {q_index + 1} of {total_questions}</div>',
-    unsafe_allow_html=True
-)
+st.markdown(f'<div class="progress-label">Question {q_index + 1} of {total_questions}</div>', unsafe_allow_html=True)
 
 progress = (q_index + 1) / total_questions
-st.markdown(
-    f"""
+st.markdown(f"""
     <div class="progress-container">
         <div class="progress-bar" style="width:{progress * 100}%"></div>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
-st.markdown(
-    f'<div class="question-number">THE ARENA · QUESTION {q_index + 1}</div>',
-    unsafe_allow_html=True
-)
+st.markdown(f'<div class="question-number">THE ARENA · QUESTION {q_index + 1}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="question-text">{question["question"]}</div>', unsafe_allow_html=True)
 
-st.markdown(
-    f'<div class="question-text">{question["question"]}</div>',
-    unsafe_allow_html=True
-)
+option_labels = [f"{chr(65 + i)}. {option}" for i, option in enumerate(question["options"])]
+selected = st.radio("Choose your answer:", option_labels, index=None, key=f"question_{q_index}", label_visibility="collapsed")
 
-# ============================================================
-# ANSWERS
-# ============================================================
-option_labels = [
-    f"{chr(65 + i)}. {option}"
-    for i, option in enumerate(question["options"])
-]
-
-selected = st.radio(
-    "Choose your answer:",
-    option_labels,
-    index=None,
-    key=f"question_{q_index}",
-    label_visibility="collapsed"
-)
-
-# ============================================================
-# NAVIGATION
-# ============================================================
 st.markdown("<br>", unsafe_allow_html=True)
 
 if selected is not None:
     selected_index = option_labels.index(selected)
-
     if q_index < total_questions - 1:
         if st.button("CONTINUE →"):
             st.session_state.answers.append(selected_index)
@@ -965,31 +870,16 @@ if selected is not None:
         if st.button("ENTER THE REAPING"):
             st.session_state.answers.append(selected_index)
             scores = calculate_scores(st.session_state.answers)
-            character, tied = determine_character(scores)
+            character, _ = determine_character(scores)
             st.session_state.scores = scores
             st.session_state.result = character
             st.session_state.finished = True
             st.rerun()
 else:
-    st.markdown(
-        """
-        <div style="
-            text-align:center;
-            color:#666;
-            font-size:0.8rem;
-            letter-spacing:1px;
-            margin-top:0.5rem;
-        ">
+    st.markdown("""
+        <div style="text-align:center;color:#666;font-size:0.8rem;letter-spacing:1px;margin-top:0.5rem;">
             SELECT AN OPTION TO CONTINUE
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """, unsafe_allow_html=True)
 
-# ============================================================
-# FOOTER
-# ============================================================
-st.markdown(
-    '<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
-    unsafe_allow_html=True
-)
+st.markdown('<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
