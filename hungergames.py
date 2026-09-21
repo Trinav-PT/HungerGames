@@ -24,7 +24,7 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
-chewie_base64 = get_base64_image("chewie.jpg")
+chewie_base64 = get_base64_image("chewie.jpeg")
 tf_base64 = get_base64_image("tf.gif")
 
 # ============================================================
