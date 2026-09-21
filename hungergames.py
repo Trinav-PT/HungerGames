@@ -32,6 +32,306 @@ sansback_base64 = get_base64_image("sansback.jpeg")
 # HUNGER GAMES INSPIRED STYLING
 # ============================================================
 st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+.stApp {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(145, 20, 20, 0.22), transparent 35%),
+        linear-gradient(180deg, #080808 0%, #111111 45%, #070707 100%);
+    color: #eeeeee;
+}
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    max-width: 1050px;
+}
+@keyframes shake-violent {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-15px, -10px) rotate(-3deg); }
+  20% { transform: translate(15px, 8px) rotate(3deg); }
+  30% { transform: translate(-12px, 12px) rotate(-2deg); }
+  40% { transform: translate(12px, -8px) rotate(2deg); }
+  50% { transform: translate(-15px, 5px) rotate(-3deg); }
+  60% { transform: translate(10px, -12px) rotate(2deg); }
+  70% { transform: translate(-10px, 10px) rotate(-1deg); }
+  80% { transform: translate(8px, -5px) rotate(1deg); }
+  90% { transform: translate(-5px, 8px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+.shake-screen {
+  animation: shake-violent 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spinning-chewie {
+  animation: spin 2.5s linear infinite;
+  width: 320px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+}
+.tf-gif {
+  width: 320px;
+  height: auto;
+  border-radius: 12px;
+}
+.hg-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 3.4rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: #e6b84a;
+    text-shadow:
+        0 0 8px rgba(230,184,74,0.35),
+        0 0 25px rgba(165,25,25,0.25);
+    margin-bottom: 0;
+}
+.hg-subtitle {
+    text-align: center;
+    color: #b8b8b8;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+    margin-bottom: 2rem;
+}
+.divider {
+    width: 70%;
+    height: 1px;
+    margin: 1.5rem auto 2rem auto;
+    background: linear-gradient(90deg, transparent, #a91d1d, #e6b84a, #a91d1d, transparent);
+}
+.question-number {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #b52a2a;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+.question-text {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.65rem;
+    line-height: 1.45;
+    font-weight: 600;
+    color: #f1f1f1;
+    margin: 0.7rem auto 1.7rem auto;
+    max-width: 900px;
+}
+div[data-testid="stRadio"] > div {
+    gap: 0.7rem;
+}
+div[data-testid="stRadio"] label {
+    background: #181818;
+    border: 1px solid #353535;
+    border-left: 3px solid #5c5c5c;
+    border-radius: 2px;
+    padding: 0.8rem 1rem;
+    transition: all 0.15s ease;
+}
+div[data-testid="stRadio"] label:hover {
+    border-left-color: #c48b2c;
+    background: #202020;
+    box-shadow: 0 0 12px rgba(196,139,44,0.08);
+}
+div[data-testid="stRadio"] label p {
+    color: #dedede !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+.stButton > button {
+    width: 100%;
+    background: linear-gradient(180deg, #a32626, #721515);
+    color: white;
+    border: 1px solid #c33a3a;
+    border-radius: 2px;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+.stButton > button:hover {
+    background: linear-gradient(180deg, #c33232, #8b1919);
+    border-color: #e6b84a;
+    box-shadow: 0 0 18px rgba(190,35,35,0.35);
+    color: white;
+}
+.progress-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+.progress-container {
+    height: 5px;
+    background: #252525;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+.progress-bar {
+    height: 5px;
+    background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
+    box-shadow: 0 0 8px rgba(230,184,74,0.35);
+}
+.result-container {
+    text-align: center;
+    padding: 2rem 1rem 3rem 1rem;
+}
+.result-small {
+    font-family: 'Cinzel', serif;
+    color: #b52a2a;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+.result-title {
+    font-family: 'Cinzel', serif;
+    color: #e6b84a;
+    font-size: 3.6rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin: 1rem 0;
+    text-shadow: 0 0 15px rgba(230,184,74,0.3), 0 0 35px rgba(150,20,20,0.2);
+}
+.result-card {
+    max-width: 750px;
+    margin: 2rem auto;
+    padding: 3rem 2rem;
+    background: radial-gradient(circle at center, rgba(150,25,25,0.13), transparent 65%), #111111;
+    border: 1px solid #4b4b4b;
+    border-top: 3px solid #e6b84a;
+    border-bottom: 3px solid #9e2020;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
+}
+.result-capitol {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #999;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+.result-name {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #e6b84a;
+    margin: 1rem 0;
+    letter-spacing: 3px;
+}
+.result-score {
+    color: #999999;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.fire-symbol {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 12px rgba(220,80,20,0.35));
+}
+.pct-container {
+    max-width: 720px;
+    margin: 0 auto 1rem auto;
+    padding: 1.8rem 2rem;
+    background: #111111;
+    border: 1px solid #3a3a3a;
+    border-top: 2px solid #e6b84a;
+}
+.pct-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.15rem;
+}
+.pct-label {
+    width: 110px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #e6b84a;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+.pct-bar-bg {
+    flex: 1;
+    height: 18px;
+    background: #1e1e1e;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 14px;
+}
+.pct-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
+    border-radius: 2px;
+}
+.pct-value {
+    width: 58px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #ccc;
+    font-family: 'Cinzel', serif;
+    flex-shrink: 0;
+}
+.name-container {
+    max-width: 650px;
+    margin: 4rem auto;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(150,25,25,0.12), transparent 70%), #111111;
+    border: 1px solid #4b4b4b;
+    border-top: 3px solid #e6b84a;
+    border-bottom: 3px solid #9e2020;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
+}
+.name-title {
+    font-family: 'Cinzel', serif;
+    color: #e6b84a;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+.name-subtitle {
+    color: #999999;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+.hg-footer {
+    text-align: center;
+    color: #555555;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 3rem;
+}
+/* Restart button styling */
+.restart-btn button {
+    background: transparent !important;
+    border: 1px solid #555 !important;
+    color: #999 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    margin-top: 1.5rem !important;
+}
+.restart-btn button:hover {
+    border-color: #e6b84a !important;
+    color: #e6b84a !important;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # ============================================================
@@ -472,10 +772,10 @@ if not st.session_state.name_submitted:
         </div>
     """, unsafe_allow_html=True)
 
-    # Show the image below the "STATE YOUR NAME" box when haunted
+    # Show the image BELOW the "STATE YOUR NAME" box when haunted
     if st.session_state.haunted and sansback_base64:
         st.markdown(f"""
-            <div style="display:flex;justify-content:center;margin:1.5rem 0;">
+            <div style="display:flex;justify-content:center;margin:1.5rem 0 2rem 0;">
                 <img src="data:image/jpeg;base64,{sansback_base64}"
                      style="max-width:100%;max-height:420px;border-radius:12px;
                             box-shadow:0 0 40px rgba(197,44,44,0.35);">
@@ -512,22 +812,22 @@ q_index = st.session_state.page
 question = QUESTIONS[q_index]
 total_questions = len(QUESTIONS)
 
-st.markdown(f'Question {q_index + 1} of {total_questions}', unsafe_allow_html=True)
+st.markdown(f'<div class="progress-label">Question {q_index + 1} of {total_questions}</div>', unsafe_allow_html=True)
 
 progress = (q_index + 1) / total_questions
 st.markdown(f"""
-<div class="progress-container">
-    <div class="progress-bar" style="width:{progress * 100}%"></div>
-</div>
+    <div class="progress-container">
+        <div class="progress-bar" style="width:{progress * 100}%"></div>
+    </div>
 """, unsafe_allow_html=True)
 
-st.markdown(f'THE ARENA · QUESTION {q_index + 1}', unsafe_allow_html=True)
-st.markdown(f'{question["question"]}', unsafe_allow_html=True)
+st.markdown(f'<div class="question-number">THE ARENA · QUESTION {q_index + 1}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="question-text">{question["question"]}</div>', unsafe_allow_html=True)
 
 option_labels = [f"{chr(65 + i)}. {option}" for i, option in enumerate(question["options"])]
 selected = st.radio("Choose your answer:", option_labels, index=None, key=f"question_{q_index}", label_visibility="collapsed")
 
-st.markdown("", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
 if selected is not None:
     selected_index = option_labels.index(selected)
@@ -553,7 +853,7 @@ else:
     """, unsafe_allow_html=True)
 
 # ---------- RESTART BUTTON (only during questions) ----------
-st.markdown("", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
@@ -571,4 +871,4 @@ with col2:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-st.markdown('PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR', unsafe_allow_html=True)
+st.markdown('<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
