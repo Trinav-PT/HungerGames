@@ -777,7 +777,7 @@ def show_credits():
 </div>
 
 <div style="margin-bottom:2.8rem;">
-<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Character Descs written by</div>
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Character Descriptions written by</div>
 <div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Avani</div>
 </div>
 
@@ -787,17 +787,17 @@ def show_credits():
 </div>
 
 <div style="margin-bottom:2.8rem;">
-<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Name you should not enter</div>
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Names you should not enter</div>
 <div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Trinav</div>
 </div>
 
 <div style="margin-bottom:2.8rem;">
-<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Name you should enter</div>
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Names you should enter</div>
 <div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Chewie</div>
 </div>
 
 <div style="font-family:'Cinzel',serif;font-size:1.15rem;color:#c52c2c;margin-top:3.5rem;letter-spacing:1px;line-height:1.6;">
-...you really watched till the end?<br>EXCELLENT. TRULY EXCELLENT.
+...you really scrolled till the end?<br>EXCELLENT. TRULY EXCELLENT.
 </div>
 
 </div>
