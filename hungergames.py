@@ -761,141 +761,47 @@ def determine_character(scores):
 # ============================================================
 def show_credits():
     st.markdown("""
-    <div style="
-        max-width: 700px;
-        margin: 2rem auto 3rem auto;
-        padding: 3.5rem 2.5rem;
-        text-align: center;
-        background: radial-gradient(circle at top, #0a0a0a, #000000);
-        border: 2px solid #e6b84a;
-        border-radius: 12px;
-        box-shadow: 0 0 40px rgba(230, 184, 74, 0.12);
-    ">
-        <div style="
-            font-family: 'Cinzel', serif;
-            font-size: 2.4rem;
-            color: #e6b84a;
-            letter-spacing: 6px;
-            margin-bottom: 3.5rem;
-            text-transform: uppercase;
-        ">CREDITS</div>
+<div style="max-width:700px;margin:2rem auto 3rem auto;padding:3.5rem 2.5rem;text-align:center;background:radial-gradient(circle at top,#0a0a0a,#000000);border:2px solid #e6b84a;border-radius:12px;box-shadow:0 0 40px rgba(230,184,74,0.12);">
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Made with DETERMINATION by</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.5rem;
-                color: #f1f1f1;
-                letter-spacing: 1px;
-            ">members of The Spine</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.05rem;
-                color: #e6b84a;
-                margin-top: 0.6rem;
-            ">(watch till the end for secrets 👀)</div>
-        </div>
+<div style="font-family:'Cinzel',serif;font-size:2.4rem;color:#e6b84a;letter-spacing:6px;margin-bottom:3.5rem;text-transform:uppercase;">CREDITS</div>
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Questions Made by</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.45rem;
-                color: #f1f1f1;
-            ">Simran and Zaina</div>
-        </div>
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Made with DETERMINATION by</div>
+<div style="font-family:'Cinzel',serif;font-size:1.5rem;color:#f1f1f1;letter-spacing:1px;">members of The Spine</div>
+<div style="font-family:'Cinzel',serif;font-size:1.05rem;color:#e6b84a;margin-top:0.6rem;">(watch till the end for secrets 👀)</div>
+</div>
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Character Descs written by</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.45rem;
-                color: #f1f1f1;
-            ">Avani</div>
-        </div>
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Questions Made by</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Simran and Zaina</div>
+</div>
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Site Dev and stupid Undertale references</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.45rem;
-                color: #f1f1f1;
-            ">Trinav</div>
-        </div>
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Character Descs written by</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Avani</div>
+</div>
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Name you should not enter</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.45rem;
-                color: #f1f1f1;
-            ">Trinav</div>
-        </div>
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Site Dev and stupid Undertale references</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Trinav</div>
+</div>
 
-        <div style="margin-bottom: 2.8rem;">
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 0.9rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.4rem;
-            ">Name you should enter</div>
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1.45rem;
-                color: #f1f1f1;
-            ">Chewie</div>
-        </div>
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Name you should not enter</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Trinav</div>
+</div>
 
-        <div style="
-            font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
-            color: #c52c2c;
-            margin-top: 3.5rem;
-            letter-spacing: 1px;
-            line-height: 1.6;
-        ">
-            ...you really watched till the end?<br>
-            Respect.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+<div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Name you should enter</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Chewie</div>
+</div>
+
+<div style="font-family:'Cinzel',serif;font-size:1.15rem;color:#c52c2c;margin-top:3.5rem;letter-spacing:1px;line-height:1.6;">
+...you really watched till the end?<br>Respect.
+</div>
+
+</div>
+""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
