@@ -333,68 +333,55 @@ div[data-testid="stRadio"] label p {
 }
 
 /* ============ MOVIE CREDITS STYLING ============ */
-.credits-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 9999;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
-.credits-scroll {
-    position: absolute;
-    top: 100%;
-    width: 100%;
+.credits-container {
     max-width: 700px;
+    margin: 2rem auto;
+    padding: 3rem 2rem;
     text-align: center;
-    animation: scrollCredits 35s linear forwards;
-}
-@keyframes scrollCredits {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-160%); }
+    background: #000;
+    border: 1px solid #333;
+    border-top: 3px solid #e6b84a;
+    border-bottom: 3px solid #9e2020;
 }
 .credits-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: #e6b84a;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     margin-bottom: 3rem;
     text-transform: uppercase;
 }
 .credits-section {
-    margin-bottom: 2.8rem;
+    margin-bottom: 2.5rem;
 }
 .credits-role {
     font-family: 'Cinzel', serif;
-    font-size: 0.95rem;
-    color: #999;
+    font-size: 0.9rem;
+    color: #888;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 .credits-name {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     color: #f1f1f1;
     letter-spacing: 1px;
 }
 .credits-special {
     font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: #e6b84a;
-    margin-top: 3rem;
+    margin-top: 0.6rem;
     letter-spacing: 1px;
 }
 .credits-secret {
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: #c52c2c;
-    margin-top: 2.5rem;
+    margin-top: 3rem;
     letter-spacing: 1px;
+    line-height: 1.6;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -707,57 +694,55 @@ def determine_character(scores):
     return random.choice(tied), tied
 
 # ============================================================
-# CREDITS OVERLAY
+# CREDITS
 # ============================================================
 def show_credits():
     st.markdown("""
-        <div class="credits-overlay">
-            <div class="credits-scroll">
-                <div class="credits-title">CREDITS</div>
+        <div class="credits-container">
+            <div class="credits-title">CREDITS</div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Made with DETERMINATION by</div>
-                    <div class="credits-name">members of The Spine</div>
-                    <div class="credits-special">(watch till the end for secrets 👀)</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Made with DETERMINATION by</div>
+                <div class="credits-name">members of The Spine</div>
+                <div class="credits-special">(watch till the end for secrets 👀)</div>
+            </div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Questions Made by</div>
-                    <div class="credits-name">Simran and Zaina</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Questions Made by</div>
+                <div class="credits-name">Simran and Zaina</div>
+            </div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Character Descs written by</div>
-                    <div class="credits-name">Avani</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Character Descs written by</div>
+                <div class="credits-name">Avani</div>
+            </div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Site Dev and stupid Undertale references</div>
-                    <div class="credits-name">Trinav</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Site Dev and stupid Undertale references</div>
+                <div class="credits-name">Trinav</div>
+            </div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Name you should not enter</div>
-                    <div class="credits-name">Trinav</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Name you should not enter</div>
+                <div class="credits-name">Trinav</div>
+            </div>
 
-                <div class="credits-section">
-                    <div class="credits-role">Name you should enter</div>
-                    <div class="credits-name">Chewie</div>
-                </div>
+            <div class="credits-section">
+                <div class="credits-role">Name you should enter</div>
+                <div class="credits-name">Chewie</div>
+            </div>
 
-                <div class="credits-secret">
-                    ...you really watched till the end?<br>
-                    Respect.
-                </div>
+            <div class="credits-secret">
+                ...you really watched till the end?<br>
+                Respect.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        if st.button("CLOSE CREDITS"):
+        if st.button("CLOSE CREDITS", use_container_width=True):
             st.session_state.show_credits = False
             st.rerun()
 
