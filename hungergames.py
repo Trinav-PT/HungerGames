@@ -34,20 +34,24 @@ sansback_base64 = get_base64_image("sansback.jpeg")
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
 }
+
 .stApp {
     background:
         radial-gradient(circle at 50% 0%, rgba(145, 20, 20, 0.22), transparent 35%),
         linear-gradient(180deg, #080808 0%, #111111 45%, #070707 100%);
     color: #eeeeee;
 }
+
 .block-container {
     padding-top: 2rem;
     padding-bottom: 4rem;
     max-width: 1050px;
 }
+
 @keyframes shake-violent {
   0% { transform: translate(0, 0) rotate(0deg); }
   10% { transform: translate(-15px, -10px) rotate(-3deg); }
@@ -61,13 +65,16 @@ html, body, [class*="css"] {
   90% { transform: translate(-5px, 8px) rotate(0deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 }
+
 .shake-screen {
   animation: shake-violent 0.4s cubic-bezier(.36,.07,.19,.97) both;
 }
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 .spinning-chewie {
   animation: spin 2.5s linear infinite;
   width: 320px;
@@ -75,11 +82,13 @@ html, body, [class*="css"] {
   border-radius: 12px;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
 }
+
 .tf-gif {
   width: 320px;
   height: auto;
   border-radius: 12px;
 }
+
 .hg-title {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -92,6 +101,7 @@ html, body, [class*="css"] {
         0 0 25px rgba(165,25,25,0.25);
     margin-bottom: 0;
 }
+
 .hg-subtitle {
     text-align: center;
     color: #b8b8b8;
@@ -101,12 +111,14 @@ html, body, [class*="css"] {
     margin-top: 0.4rem;
     margin-bottom: 2rem;
 }
+
 .divider {
     width: 70%;
     height: 1px;
     margin: 1.5rem auto 2rem auto;
     background: linear-gradient(90deg, transparent, #a91d1d, #e6b84a, #a91d1d, transparent);
 }
+
 .question-number {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -116,6 +128,7 @@ html, body, [class*="css"] {
     letter-spacing: 4px;
     text-transform: uppercase;
 }
+
 .question-text {
     text-align: center;
     font-family: 'Cinzel', serif;
@@ -126,9 +139,11 @@ html, body, [class*="css"] {
     margin: 0.7rem auto 1.7rem auto;
     max-width: 900px;
 }
+
 div[data-testid="stRadio"] > div {
     gap: 0.7rem;
 }
+
 div[data-testid="stRadio"] label {
     background: #181818;
     border: 1px solid #353535;
@@ -137,16 +152,19 @@ div[data-testid="stRadio"] label {
     padding: 0.8rem 1rem;
     transition: all 0.15s ease;
 }
+
 div[data-testid="stRadio"] label:hover {
     border-left-color: #c48b2c;
     background: #202020;
     box-shadow: 0 0 12px rgba(196,139,44,0.08);
 }
+
 div[data-testid="stRadio"] label p {
     color: #dedede !important;
     font-size: 0.95rem !important;
     line-height: 1.5 !important;
 }
+
 .stButton > button {
     width: 100%;
     background: linear-gradient(180deg, #a32626, #721515);
@@ -160,12 +178,14 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     transition: all 0.2s ease;
 }
+
 .stButton > button:hover {
     background: linear-gradient(180deg, #c33232, #8b1919);
     border-color: #e6b84a;
     box-shadow: 0 0 18px rgba(190,35,35,0.35);
     color: white;
 }
+
 .progress-label {
     text-align: center;
     font-size: 0.8rem;
@@ -174,21 +194,25 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-bottom: 0.4rem;
 }
+
 .progress-container {
     height: 5px;
     background: #252525;
     width: 100%;
     margin-bottom: 2rem;
 }
+
 .progress-bar {
     height: 5px;
     background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
     box-shadow: 0 0 8px rgba(230,184,74,0.35);
 }
+
 .result-container {
     text-align: center;
     padding: 2rem 1rem 3rem 1rem;
 }
+
 .result-small {
     font-family: 'Cinzel', serif;
     color: #b52a2a;
@@ -197,6 +221,7 @@ div[data-testid="stRadio"] label p {
     letter-spacing: 5px;
     text-transform: uppercase;
 }
+
 .result-title {
     font-family: 'Cinzel', serif;
     color: #e6b84a;
@@ -206,6 +231,7 @@ div[data-testid="stRadio"] label p {
     margin: 1rem 0;
     text-shadow: 0 0 15px rgba(230,184,74,0.3), 0 0 35px rgba(150,20,20,0.2);
 }
+
 .result-card {
     max-width: 750px;
     margin: 2rem auto;
@@ -216,6 +242,7 @@ div[data-testid="stRadio"] label p {
     border-bottom: 3px solid #9e2020;
     box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
 }
+
 .result-capitol {
     font-family: 'Cinzel', serif;
     font-size: 1rem;
@@ -223,6 +250,7 @@ div[data-testid="stRadio"] label p {
     letter-spacing: 4px;
     text-transform: uppercase;
 }
+
 .result-name {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
@@ -231,17 +259,20 @@ div[data-testid="stRadio"] label p {
     margin: 1rem 0;
     letter-spacing: 3px;
 }
+
 .result-score {
     color: #999999;
     font-size: 0.9rem;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
 .fire-symbol {
     font-size: 4rem;
     margin-bottom: 0.5rem;
     filter: drop-shadow(0 0 12px rgba(220,80,20,0.35));
 }
+
 .pct-container {
     max-width: 720px;
     margin: 0 auto 1rem auto;
@@ -250,11 +281,13 @@ div[data-testid="stRadio"] label p {
     border: 1px solid #3a3a3a;
     border-top: 2px solid #e6b84a;
 }
+
 .pct-row {
     display: flex;
     align-items: center;
     margin-bottom: 1.15rem;
 }
+
 .pct-label {
     width: 110px;
     font-family: 'Cinzel', serif;
@@ -263,6 +296,7 @@ div[data-testid="stRadio"] label p {
     letter-spacing: 1px;
     flex-shrink: 0;
 }
+
 .pct-bar-bg {
     flex: 1;
     height: 18px;
@@ -271,11 +305,13 @@ div[data-testid="stRadio"] label p {
     overflow: hidden;
     margin: 0 14px;
 }
+
 .pct-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, #781717, #d29a32, #e6b84a);
     border-radius: 2px;
 }
+
 .pct-value {
     width: 58px;
     text-align: right;
@@ -284,6 +320,7 @@ div[data-testid="stRadio"] label p {
     font-family: 'Cinzel', serif;
     flex-shrink: 0;
 }
+
 .name-container {
     max-width: 650px;
     margin: 4rem auto;
@@ -295,6 +332,7 @@ div[data-testid="stRadio"] label p {
     border-bottom: 3px solid #9e2020;
     box-shadow: 0 15px 50px rgba(0,0,0,0.65), 0 0 30px rgba(130,20,20,0.08);
 }
+
 .name-title {
     font-family: 'Cinzel', serif;
     color: #e6b84a;
@@ -303,6 +341,7 @@ div[data-testid="stRadio"] label p {
     letter-spacing: 3px;
     margin-bottom: 1rem;
 }
+
 .name-subtitle {
     color: #999999;
     font-size: 0.9rem;
@@ -310,6 +349,7 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-bottom: 2rem;
 }
+
 .hg-footer {
     text-align: center;
     color: #555555;
@@ -318,6 +358,7 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-top: 3rem;
 }
+
 /* Restart button styling */
 .restart-btn button {
     background: transparent !important;
@@ -327,59 +368,81 @@ div[data-testid="stRadio"] label p {
     letter-spacing: 1px !important;
     margin-top: 1.5rem !important;
 }
+
 .restart-btn button:hover {
     border-color: #e6b84a !important;
     color: #e6b84a !important;
 }
 
-/* ============ MOVIE CREDITS STYLING ============ */
-.credits-container {
+/* ============ MOVIE CREDITS STYLING (FIXED) ============ */
+@keyframes credit-scroll {
+    0%   { transform: translateY(100%); }
+    100% { transform: translateY(-160%); }
+}
+
+.credits-outer {
     max-width: 700px;
     margin: 2rem auto;
-    padding: 3rem 2rem;
-    text-align: center;
-    background: #000;
-    border: 1px solid #333;
-    border-top: 3px solid #e6b84a;
-    border-bottom: 3px solid #9e2020;
+    height: 480px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at top, #0a0a0a, #000000);
+    border: 2px solid #e6b84a;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(230, 184, 74, 0.15);
 }
+
+.credits-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    animation: credit-scroll 38s linear infinite;
+    padding: 0 1.5rem;
+}
+
 .credits-title {
     font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     color: #e6b84a;
     letter-spacing: 6px;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     text-transform: uppercase;
 }
-.credits-section {
-    margin-bottom: 2.5rem;
+
+.credit-line {
+    margin: 2.2rem 0;
 }
-.credits-role {
+
+.credit-role {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #888;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 0.35rem;
 }
-.credits-name {
+
+.credit-name {
     font-family: 'Cinzel', serif;
     font-size: 1.45rem;
     color: #f1f1f1;
     letter-spacing: 1px;
 }
-.credits-special {
+
+.credit-special {
     font-family: 'Cinzel', serif;
     font-size: 1.1rem;
     color: #e6b84a;
-    margin-top: 0.6rem;
-    letter-spacing: 1px;
+    margin-top: 0.5rem;
 }
-.credits-secret {
+
+.credit-secret {
     font-family: 'Cinzel', serif;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: #c52c2c;
-    margin-top: 3rem;
+    margin-top: 4rem;
     letter-spacing: 1px;
     line-height: 1.6;
 }
@@ -694,73 +757,11 @@ def determine_character(scores):
     return random.choice(tied), tied
 
 # ============================================================
-# CREDITS
+# CREDITS (FIXED)
 # ============================================================
 def show_credits():
     st.markdown("""
-    <div style="
-        background: radial-gradient(circle at top, #0a0a0a, #000000);
-        border: 2px solid #e6b84a;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 1rem 0 2rem 0;
-        box-shadow: 0 0 30px rgba(230, 184, 74, 0.15);
-        color: #f1f1f1;
-        font-family: 'Cinzel', serif;
-        position: relative;
-        overflow: hidden;
-        min-height: 420px;
-    ">
-        <style>
-            @keyframes credit-scroll {
-                from { transform: translateY(100%); }
-                to   { transform: translateY(-140%); }
-            }
-            .credits-scroll {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                animation: credit-scroll 35s linear infinite;
-                text-align: center;
-            }
-            .credits-title {
-                font-size: 2.3rem;
-                color: #e6b84a;
-                letter-spacing: 6px;
-                margin-bottom: 3rem;
-                text-transform: uppercase;
-            }
-            .credit-line {
-                margin: 2rem 0;
-            }
-            .credit-role {
-                font-size: 0.95rem;
-                color: #888;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin-bottom: 0.35rem;
-            }
-            .credit-name {
-                font-size: 1.45rem;
-                color: #f1f1f1;
-                letter-spacing: 1px;
-            }
-            .credit-special {
-                font-size: 1.1rem;
-                color: #e6b84a;
-                margin-top: 0.5rem;
-            }
-            .credit-secret {
-                font-size: 1.15rem;
-                color: #c52c2c;
-                margin-top: 3.5rem;
-                letter-spacing: 1px;
-                line-height: 1.6;
-            }
-        </style>
-
+    <div class="credits-outer">
         <div class="credits-scroll">
             <div class="credits-title">CREDITS</div>
 
@@ -802,6 +803,8 @@ def show_credits():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -898,9 +901,7 @@ def show_result():
             rows.append(row)
         bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
         st.markdown(bars_html, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
-
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         if st.button("RE-ENTER THE ARENA"):
@@ -935,9 +936,11 @@ if st.session_state.show_credits:
 if st.session_state.access_denied:
     show_access_denied()
     st.stop()
+
 if st.session_state.chewie_mode:
     show_chewie()
     st.stop()
+
 if st.session_state.finished:
     show_result()
     st.stop()
@@ -968,7 +971,6 @@ if not st.session_state.name_submitted:
 
     name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
     st.markdown("<br>", unsafe_allow_html=True)
-
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         if st.button("ENTER THE ARENA"):
@@ -992,7 +994,6 @@ if not st.session_state.name_submitted:
         if st.button("CREDITS"):
             st.session_state.show_credits = True
             st.rerun()
-
     st.stop()
 
 # ============================================================
@@ -1003,7 +1004,6 @@ question = QUESTIONS[q_index]
 total_questions = len(QUESTIONS)
 
 st.markdown(f'<div class="progress-label">Question {q_index + 1} of {total_questions}</div>', unsafe_allow_html=True)
-
 progress = (q_index + 1) / total_questions
 st.markdown(f"""
     <div class="progress-container">
