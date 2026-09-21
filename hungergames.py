@@ -714,7 +714,7 @@ def show_credits():
         <style>
             @keyframes credit-scroll {
                 from { transform: translateY(100%); }
-                to   { transform: translateY(-130%); }
+                to   { transform: translateY(-140%); }
             }
             .credits-scroll {
                 position: absolute;
@@ -722,28 +722,28 @@ def show_credits():
                 left: 0;
                 width: 100%;
                 height: 100%;
-                animation: credit-scroll 32s linear infinite;
+                animation: credit-scroll 35s linear infinite;
                 text-align: center;
             }
             .credits-title {
-                font-size: 2.2rem;
+                font-size: 2.3rem;
                 color: #e6b84a;
-                letter-spacing: 5px;
-                margin-bottom: 2.8rem;
+                letter-spacing: 6px;
+                margin-bottom: 3rem;
                 text-transform: uppercase;
             }
             .credit-line {
-                margin: 1.8rem 0;
+                margin: 2rem 0;
             }
             .credit-role {
                 font-size: 0.95rem;
                 color: #888;
                 letter-spacing: 2px;
                 text-transform: uppercase;
-                margin-bottom: 0.3rem;
+                margin-bottom: 0.35rem;
             }
             .credit-name {
-                font-size: 1.4rem;
+                font-size: 1.45rem;
                 color: #f1f1f1;
                 letter-spacing: 1px;
             }
@@ -753,9 +753,9 @@ def show_credits():
                 margin-top: 0.5rem;
             }
             .credit-secret {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
                 color: #c52c2c;
-                margin-top: 3rem;
+                margin-top: 3.5rem;
                 letter-spacing: 1px;
                 line-height: 1.6;
             }
