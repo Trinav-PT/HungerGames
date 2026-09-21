@@ -809,11 +809,12 @@ def show_result():
         st.rerun()
 
 # ============================================================
-# MAIN HEADER
+# MAIN HEADER  (hidden when haunted)
 # ============================================================
-st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
-st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
-st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+if not st.session_state.haunted:
+    st.markdown('<div class="hg-title">WHO IS YOUR HUNGER GAMES CHARACTER?</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hg-subtitle">MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
+    st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # ============================================================
 # ROUTING
@@ -866,26 +867,7 @@ if not st.session_state.name_submitted:
         st.session_state.name_submitted = True
         st.rerun()
 
-    # Restart button also available on name screen
-    st.markdown("<br>", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
-        if st.button("Had a change of heart? Restart Quiz"):
-            st.session_state.page = 0
-            st.session_state.answers = []
-            st.session_state.finished = False
-            st.session_state.result = None
-            st.session_state.scores = None
-            st.session_state.name = ""
-            st.session_state.name_submitted = False
-            st.session_state.haunted = True          # activate haunting
-            # reshuffle questions on restart as well
-            st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    st.stop()
+    st.stop()   # ← no restart button on name screen
 
 # ============================================================
 # CURRENT QUESTION
@@ -934,7 +916,7 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-# ---------- RESTART BUTTON (during quiz only) ----------
+# ---------- RESTART BUTTON (only during questions) ----------
 st.markdown("<br>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
@@ -948,7 +930,7 @@ with col2:
         st.session_state.name = ""
         st.session_state.name_submitted = False
         st.session_state.haunted = True          # activate haunting
-        # reshuffle on restart
+        # reshuffle questions on restart
         st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
