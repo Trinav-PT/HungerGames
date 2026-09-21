@@ -1,6 +1,8 @@
 import streamlit as st
 import random
 from collections import Counter
+import base64
+import os
 
 # ============================================================
 # PAGE CONFIG
@@ -12,6 +14,18 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# ============================================================
+# HELPER TO ENCODE BACKGROUND IMAGE
+# ============================================================
+
+def get_base64_image(image_path):
+    if os.path.exists(image_path):
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    return ""
+
+gaster_base64 = get_base64_image("gasterbg.jfif")
 
 # ============================================================
 # HUNGER GAMES INSPIRED STYLING
@@ -608,14 +622,14 @@ def determine_character(scores):
 
 def show_access_denied():
     st.markdown(
-        """
+        f"""
         <style>
-        .stApp {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("app/static/gasterbg.jfif") !important;
+        .stApp {{
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("data:image/jfif;base64,{gaster_base64}") !important;
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
-        }
+        }}
         </style>
         
         <div class="shake-screen" style="
