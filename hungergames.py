@@ -3,6 +3,7 @@ import random
 from collections import Counter
 import base64
 import os
+import plotly.graph_objects as go
 
 # ============================================================
 # PAGE CONFIG
@@ -24,7 +25,7 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
-chewie_base64 = get_base64_image("chewie.jpeg")
+chewie_base64 = get_base64_image("chewie.jpg")
 tf_base64 = get_base64_image("tf.gif")
 
 # ============================================================
@@ -411,128 +412,125 @@ CHARACTERS = [
     "Snow",
     "Cinna",
     "Johanna",
-    "Effie"
+    "Effie",
+    "Plutarch",
+    "Foxface",
+    "Beetee"
 ]
 
 # ============================================================
-# QUESTIONS
+# QUESTIONS (NEW SET)
 # ============================================================
 QUESTIONS = [
+    # QUESTION 1
     {
-        "question": """What are you most given to do if you have an upcoming test and wifi is down (for a long time)?""",
+        "question": "You're on the Capitol train and dinner arrives. There are approximately 47 dishes in front of you. You have no idea what half of them are.",
         "options": [
-            """You take to the bulletin, cast rightful blame, and delineate how things haven’t been improving, as a quasi-productive way of procrastination""",
-            """You already have the material downloaded, so it’s not of much consequence to you; you quietly get on while the rest scramble""",
-            """You switch to mobile data and take a hedonistic deepdive into your internet recesses of choice till the wifi comes back on (and then procrastinate for “10 more minutes” after it comes back on)""",
-            """You actively send your downloaded material on your class WhatsApp groups in this time of need, and prioritise sorting out people’s pre-test queries over locking in yourself""",
-            """You sneakily sit on your downloaded material because you believe in taking all the advantages life hands you"""
+            "Try everything. You may never get food like this again.",
+            "Take the things that look like they'll actually be useful later.",
+            "Spend the entire meal trying to figure out which dishes are ridiculously expensive.",
+            "Don't touch anything until you've established whether it's safe.",
+            "“Finally. A civilisation with standards.”"
         ],
         "scores": {
-            "Katniss": [1, 3, 0, 1, -1],
-            "Peeta": [0, 1, 0, 3, -2],
-            "Gale": [3, 1, 0, 1, 2],
-            "Haymitch": [2, 2, 3, 0, 1],
-            "Prim": [0, 2, 0, 3, -2],
-            "Finnick": [0, 1, 3, 2, 1],
-            "Rue": [1, 3, 1, 2, -1],
-            "Snow": [1, 1, 0, -1, 3],
-            "Cinna": [0, 2, 0, 2, -1],
-            "Johanna": [2, 0, 1, 0, 2],
-            "Effie": [1, 3, -1, 1, 1]
+            "Katniss":  [0, 3, 0, 0, 0],
+            "Peeta":    [3, 0, 0, 0, 0],
+            "Gale":     [0, 0, 0, 0, 0],
+            "Haymitch": [0, 2, 2, 0, 0],
+            "Prim":     [0, 0, 0, 0, 0],
+            "Finnick":  [0, 0, 0, 0, 1],
+            "Rue":      [0, 0, 0, 0, 0],
+            "Snow":     [0, 0, 0, 0, 0],
+            "Cinna":    [0, 0, 0, 0, 0],
+            "Johanna":  [0, 0, 0, 0, 0],
+            "Effie":    [1, 0, 0, 0, 3],
+            "Plutarch": [0, 0, 2, 0, 0],
+            "Foxface":  [0, 0, 0, 3, 0],
+            "Beetee":   [0, 0, 0, 1, 0]
         }
     },
+    # QUESTION 2
     {
-        "question": """You have your D&I major project on your hands- what kind of teammate do you think you will be?""",
+        "question": "You discover your alliance has been stealing your food. What do you do?",
         "options": [
-            """The one who attempts to do just as much as is required to be considered an ‘active contributor’ and save their score in the peer-grading""",
-            """The one who considers themselves inexperienced and unskilled, but is there to learn and constructively contribute, and is unabashed about it""",
-            """The one who somewhat does care about his grade, and his skillset, but just cannot be arsed""",
-            """The one who quietly works on an important chunk of the project independently instead of being the supervisor or coordinator""",
-            """The one who inevitably ends up organizing the group, dividing the work, setting deadlines, and chasing people""",
-            """The “you don't sell the steak, you sell the sizzle” guy- you come up with the interesting angle, make the presentation compelling, and are the voice of the group"""
+            "Confront them immediately.",
+            "Say nothing. Now you know who not to trust.",
+            "Replace the food with something they'll regret eating.",
+            "Ask them why they did it before deciding what to do.",
+            "Pretend you haven't noticed and feed them false information.",
+            "Honestly? Impressive. You join them."
         ],
         "scores": {
-            "Katniss": [1, 1, 0, 3, 1, 0],
-            "Peeta": [-1, 3, 0, 1, 1, 3],
-            "Gale": [1, 1, 0, 2, 3, 2],
-            "Haymitch": [3, 0, 3, 1, 1, 1],
-            "Prim": [-1, 3, 0, 1, 1, 2],
-            "Finnick": [1, 1, 2, 0, 1, 3],
-            "Rue": [1, 3, 1, 2, 1, 1],
-            "Snow": [3, -1, 1, 1, 3, 2],
-            "Cinna": [0, 2, 0, 3, 1, 3],
-            "Johanna": [3, 0, 2, 2, 1, 1],
-            "Effie": [1, 1, -1, 0, 3, 2]
+            "Katniss":  [1, 3, 0, 0, 0, 0],
+            "Peeta":    [0, 0, 0, 3, 0, 0],
+            "Gale":     [0, 0, 0, 0, 0, 0],
+            "Haymitch": [0, 0, 3, 0, 0, 2],
+            "Prim":     [0, 0, 0, 0, 0, 0],
+            "Finnick":  [0, 0, 0, 1, 0, 2],
+            "Rue":      [0, 0, 0, 0, 0, 0],
+            "Snow":     [0, 0, 0, 0, 0, 0],
+            "Cinna":    [0, 0, 0, 0, 0, 0],
+            "Johanna":  [3, 0, 2, 0, 0, 0],
+            "Effie":    [0, 0, 0, 0, 0, 0],
+            "Plutarch": [0, 0, 0, 0, 3, 0],
+            "Foxface":  [0, 2, 0, 0, 3, 0],
+            "Beetee":   [0, 0, 0, 0, 0, 0]
         }
     },
+    # QUESTION 4 (as provided)
     {
-        "question": """You’re a sophomore, and the incoming batch has arrived. What kind of a senior are you to the new freshmen?""",
+        "question": "You're given 30 seconds at the Cornucopia. What are you taking?",
         "options": [
-            """You’re pretty ambivalent about the whole “senior” thing- you’ll talk to them if the situation calls for it, but you won’t particularly seek them out or feel the need to establish yourself as a senior""",
-            """You can’t wait to become a mentor or older-sibling-figure to them, and want to speak to as many as possible""",
-            """You are somewhat looking forward to interacting with them, and would potentially like to be close to a few juniors who strike you as kindred""",
-            """You want to be the cool senior that all the juniors know the name of, and admire from a distance""",
-            """You’d like to be the cool senior too, but not at the cost of deep connection and proximity with the juniors"""
+            "A weapon.",
+            "Medicine.",
+            "Food and water.",
+            "Something nobody else seems interested in.",
+            "Whatever looks most expensive.",
+            "Whatever I can dismantle into something more useful."
         ],
         "scores": {
-            "Katniss": [3, 1, 2, -1, 1],
-            "Peeta": [0, 3, 3, -1, 1],
-            "Gale": [2, 1, 2, 1, 3],
-            "Haymitch": [3, -1, 1, 0, -1],
-            "Prim": [1, 3, 3, -1, 1],
-            "Finnick": [0, 2, 2, 3, 3],
-            "Rue": [2, 2, 3, -1, 1],
-            "Snow": [1, -1, 0, 3, 2],
-            "Cinna": [2, 1, 2, 1, 3],
-            "Johanna": [3, -1, 1, 2, 0],
-            "Effie": [0, 2, 1, 3, 2]
+            "Katniss":  [3, 2, 1, 0, 0, 0],
+            "Peeta":    [0, 2, 0, 0, 0, 0],
+            "Gale":     [0, 0, 0, 0, 0, 0],
+            "Haymitch": [0, 0, 3, 0, 0, 1],
+            "Prim":     [0, 0, 0, 0, 0, 0],
+            "Finnick":  [0, 0, 0, 0, 1, 0],
+            "Rue":      [0, 0, 0, 0, 0, 0],
+            "Snow":     [0, 0, 0, 0, 0, 0],
+            "Cinna":    [0, 0, 0, 0, 0, 0],
+            "Johanna":  [1, 0, 0, 0, 0, 0],
+            "Effie":    [0, 0, 0, 0, 3, 0],
+            "Plutarch": [0, 0, 0, 1, 0, 0],
+            "Foxface":  [0, 0, 0, 3, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0, 3]
         }
     },
+    # QUESTION 5
     {
-        "question": """It’s peak lunch hour in the mess, and you run into that senior who rejected you from their club, the ilgc teammate you’ve had a spat with, your ex-situationship, and your week 1 ‘friend’ you don’t talk to anymore, because Plaksha is the smallest godforsaken place on Earth; what do you do next?""",
+        "question": "You have one hour to prepare for the arena. What are you doing?",
         "options": [
-            """You acknowledge everyone politely, act like nothing happened, and proceed with your lunch- you’re a chill dude""",
-            """You make a banger joke about the sheer absurdity of all four of them being here at the same time, successfully break the tension for a second, and then have no idea what to do next""",
-            """You assess the situation and talk to anyone if they’re worth engaging with- you don’t believe in severing ties for trifling reasons""",
-            """You make no effort to hide the instinctual eyeroll, and sit on an empty seat confidently even if it’s close to them""",
-            """You desert the social minefield immediately to go to Tonnies or skip lunch entirely""",
-            """You try to break the ice with someone as you find it uncomfortable or unnecessary to awkwardly orbit a person you have interacted with in the past"""
+            "Learning the layout.",
+            "Practising with your weapon.",
+            "Figuring out who is likely to form alliances.",
+            "Finding out what the audience likes about you.",
+            "Looking for weaknesses in the arena itself.",
+            "Taking a nap."
         ],
         "scores": {
-            "Katniss": [3, 1, 2, 3, 1, 1],
-            "Peeta": [2, 3, 2, 0, -1, 3],
-            "Gale": [2, 1, 3, 2, 0, 1],
-            "Haymitch": [3, 3, 2, 1, 2, -1],
-            "Prim": [3, 1, 2, 0, -1, 3],
-            "Finnick": [3, 3, 2, 2, 1, 3],
-            "Rue": [3, 1, 2, 1, 2, 1],
-            "Snow": [3, 1, 3, 2, 0, 1],
-            "Cinna": [3, 2, 2, 1, 1, 3],
-            "Johanna": [1, 3, 2, 3, 2, 1],
-            "Effie": [3, 1, 3, 1, 1, 2]
-        }
-    },
-    {
-        "question": """What has been your personal strategy to grapple with the recent Plaksha mess scandals?""",
-        "options": [
-            """You’re a careful consumer who sifts through the food before eating it, but you cannot be arsed to find alternative sources of food 3 times a day""",
-            """You’re also one of the mess regulars, but you don’t really think much about what could go wrong and are about that devil-may-care life""",
-            """You order out quite often (not really because of safety concerns, but because concerned parents send you extra money for food, which you gladly accept)""",
-            """You take to bulletin with evidence as a truly concerned member of the university, with sincere hopes that someone will bring about change""",
-            """You actively suggest potential solutions and contact relevant authority members/ student activists to catalyse change firsthand"""
-        ],
-        "scores": {
-            "Katniss": [3, 1, 1, 2, 3],
-            "Peeta": [2, 0, 1, 3, 2],
-            "Gale": [1, 0, 1, 3, 3],
-            "Haymitch": [2, 3, 2, 1, 1],
-            "Prim": [3, -1, 1, 3, 2],
-            "Finnick": [1, 2, 3, 1, 2],
-            "Rue": [3, 1, 1, 2, 2],
-            "Snow": [2, 1, 3, 2, 3],
-            "Cinna": [1, 0, 1, 3, 3],
-            "Johanna": [1, 2, 1, 3, 2],
-            "Effie": [2, -1, 2, 3, 2]
+            "Katniss":  [0, 3, 0, 0, 0, 0],
+            "Peeta":    [0, 0, 0, 3, 0, 0],
+            "Gale":     [0, 0, 0, 0, 0, 0],
+            "Haymitch": [0, 0, 0, 0, 0, 3],
+            "Prim":     [0, 0, 0, 0, 0, 0],
+            "Finnick":  [0, 0, 3, 2, 0, 0],
+            "Rue":      [0, 0, 0, 0, 0, 0],
+            "Snow":     [0, 0, 0, 0, 0, 0],
+            "Cinna":    [0, 0, 0, 0, 0, 0],
+            "Johanna":  [0, 2, 0, 0, 0, 1],
+            "Effie":    [0, 0, 0, 0, 0, 0],
+            "Plutarch": [2, 0, 2, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 2, 0],
+            "Beetee":   [3, 0, 0, 0, 3, 0]
         }
     }
 ]
@@ -719,14 +717,77 @@ def show_result():
         unsafe_allow_html=True
     )
 
-    with st.expander("View your scores"):
-        sorted_scores = sorted(
-            scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-        for char, score in sorted_scores:
-            st.write(f"**{char}** — {score}")
+    # ---------- STYLISED PIE CHART ----------
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: #e6b84a;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        ">
+            YOUR ALIGNMENT
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Make scores non-negative for percentage calculation
+    score_dict = dict(scores)
+    min_s = min(score_dict.values()) if score_dict else 0
+    shifted = {k: v - min_s for k, v in score_dict.items()}
+    total = sum(shifted.values()) or 1
+
+    # Keep only characters that have meaningful share (> 2%)
+    labels = []
+    values = []
+    for char, val in sorted(shifted.items(), key=lambda x: x[1], reverse=True):
+        pct = (val / total) * 100
+        if pct >= 1.5:          # hide tiny slices
+            labels.append(char)
+            values.append(round(pct, 1))
+
+    # Hunger Games colour palette
+    colors = [
+        "#e6b84a", "#c52c2c", "#9e2020", "#d29a32",
+        "#781717", "#f0d78c", "#a91d1d", "#b8b8b8",
+        "#5c5c5c", "#e6b84a", "#c52c2c", "#9e2020",
+        "#d29a32", "#781717"
+    ]
+
+    fig = go.Figure(data=[go.Pie(
+        labels=labels,
+        values=values,
+        hole=0.42,
+        marker=dict(
+            colors=colors[:len(labels)],
+            line=dict(color="#111111", width=2)
+        ),
+        textinfo="label+percent",
+        textfont=dict(size=14, family="Cinzel, serif", color="#eeeeee"),
+        hoverinfo="label+percent+value",
+        pull=[0.06 if lab == character else 0 for lab in labels]
+    )])
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        showlegend=False,
+        margin=dict(t=20, b=20, l=20, r=20),
+        height=480,
+        annotations=[dict(
+            text=f"<b>{character.upper()}</b>",
+            x=0.5, y=0.5,
+            font=dict(size=18, family="Cinzel, serif", color="#e6b84a"),
+            showarrow=False
+        )]
+    )
+
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -801,7 +862,7 @@ if not st.session_state.name_submitted:
             st.stop()
 
         # ========================================================
-        # TRINAV CHECK (TRIGGERS FULL ERROR PAGE)
+        # TRINAV CHECK
         # ========================================================
         if "trinav" in entered_name.lower():
             st.session_state.access_denied = True
@@ -823,7 +884,7 @@ if not st.session_state.name_submitted:
         }
 
         if entered_name.lower() in character_names:
-            st.error("You think you can choose your own fate?")
+            st.error("you think you can choose your own fate?")
             st.stop()
 
         # ========================================================
