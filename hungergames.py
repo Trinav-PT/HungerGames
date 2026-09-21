@@ -331,6 +331,71 @@ div[data-testid="stRadio"] label p {
     border-color: #e6b84a !important;
     color: #e6b84a !important;
 }
+
+/* ============ MOVIE CREDITS STYLING ============ */
+.credits-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+.credits-scroll {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    animation: scrollCredits 35s linear forwards;
+}
+@keyframes scrollCredits {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-160%); }
+}
+.credits-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #e6b84a;
+    letter-spacing: 4px;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+}
+.credits-section {
+    margin-bottom: 2.8rem;
+}
+.credits-role {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #999;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+.credits-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+}
+.credits-special {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: #e6b84a;
+    margin-top: 3rem;
+    letter-spacing: 1px;
+}
+.credits-secret {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #c52c2c;
+    margin-top: 2.5rem;
+    letter-spacing: 1px;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -613,6 +678,8 @@ if "name_submitted" not in st.session_state:
     st.session_state.name_submitted = False
 if "haunted" not in st.session_state:
     st.session_state.haunted = False
+if "show_credits" not in st.session_state:
+    st.session_state.show_credits = False
 
 # Shuffle questions once per session (reshuffles on full page refresh)
 if "shuffled_questions" not in st.session_state:
@@ -638,6 +705,61 @@ def determine_character(scores):
     if len(tied) == 1:
         return tied[0], tied
     return random.choice(tied), tied
+
+# ============================================================
+# CREDITS OVERLAY
+# ============================================================
+def show_credits():
+    st.markdown("""
+        <div class="credits-overlay">
+            <div class="credits-scroll">
+                <div class="credits-title">CREDITS</div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Made with DETERMINATION by</div>
+                    <div class="credits-name">members of The Spine</div>
+                    <div class="credits-special">(watch till the end for secrets 👀)</div>
+                </div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Questions Made by</div>
+                    <div class="credits-name">Simran and Zaina</div>
+                </div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Character Descs written by</div>
+                    <div class="credits-name">Avani</div>
+                </div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Site Dev and stupid Undertale references</div>
+                    <div class="credits-name">Trinav</div>
+                </div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Name you should not enter</div>
+                    <div class="credits-name">Trinav</div>
+                </div>
+
+                <div class="credits-section">
+                    <div class="credits-role">Name you should enter</div>
+                    <div class="credits-name">Chewie</div>
+                </div>
+
+                <div class="credits-secret">
+                    ...you really watched till the end?<br>
+                    Respect.
+                </div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("CLOSE CREDITS"):
+            st.session_state.show_credits = False
+            st.rerun()
 
 # ============================================================
 # ERROR / CHEWIE / RESULT VIEWS
@@ -728,17 +850,24 @@ def show_result():
             rows.append(row)
         bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
         st.markdown(bars_html, unsafe_allow_html=True)
+
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("RE-ENTER THE ARENA"):
-        st.session_state.page = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.session_state.result = None
-        st.session_state.scores = None
-        st.session_state.name = ""
-        st.session_state.name_submitted = False
-        # Note: haunted flag is intentionally NOT cleared here
-        st.rerun()
+
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        if st.button("RE-ENTER THE ARENA"):
+            st.session_state.page = 0
+            st.session_state.answers = []
+            st.session_state.finished = False
+            st.session_state.result = None
+            st.session_state.scores = None
+            st.session_state.name = ""
+            st.session_state.name_submitted = False
+            st.rerun()
+    with col3:
+        if st.button("CREDITS"):
+            st.session_state.show_credits = True
+            st.rerun()
 
 # ============================================================
 # MAIN HEADER  (hidden when haunted)
@@ -751,6 +880,10 @@ if not st.session_state.haunted:
 # ============================================================
 # ROUTING
 # ============================================================
+if st.session_state.show_credits:
+    show_credits()
+    st.stop()
+
 if st.session_state.access_denied:
     show_access_denied()
     st.stop()
@@ -788,25 +921,31 @@ if not st.session_state.name_submitted:
     name = st.text_input("Your name", key="name_input", placeholder="Enter your name...", label_visibility="collapsed")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    if st.button("ENTER THE ARENA"):
-        entered_name = name.strip()
-        if not entered_name:
-            st.error("You must state your name before entering the arena.")
-            st.stop()
-        if "trinav" in entered_name.lower():
-            st.session_state.access_denied = True
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        if st.button("ENTER THE ARENA"):
+            entered_name = name.strip()
+            if not entered_name:
+                st.error("You must state your name before entering the arena.")
+                st.stop()
+            if "trinav" in entered_name.lower():
+                st.session_state.access_denied = True
+                st.rerun()
+            if "chewie" in entered_name.lower():
+                st.session_state.chewie_mode = True
+                st.rerun()
+            if entered_name.lower() in {c.lower() for c in CHARACTERS}:
+                st.error("you think you can choose your own fate?")
+                st.stop()
+            st.session_state.name = entered_name
+            st.session_state.name_submitted = True
             st.rerun()
-        if "chewie" in entered_name.lower():
-            st.session_state.chewie_mode = True
+    with col3:
+        if st.button("CREDITS"):
+            st.session_state.show_credits = True
             st.rerun()
-        if entered_name.lower() in {c.lower() for c in CHARACTERS}:
-            st.error("you think you can choose your own fate?")
-            st.stop()
-        st.session_state.name = entered_name
-        st.session_state.name_submitted = True
-        st.rerun()
 
-    st.stop()   # ← no restart button on name screen
+    st.stop()
 
 # ============================================================
 # CURRENT QUESTION
@@ -868,8 +1007,7 @@ with col2:
         st.session_state.scores = None
         st.session_state.name = ""
         st.session_state.name_submitted = False
-        st.session_state.haunted = True          # activate haunting
-        # reshuffle questions on restart
+        st.session_state.haunted = True
         st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
