@@ -760,7 +760,7 @@ def determine_character(scores):
 # CREDITS (FIXED)
 # ============================================================
 def show_credits():
-    st.markdown("""
+    credits_html = """
     <div class="credits-outer">
         <div class="credits-scroll">
             <div class="credits-title">CREDITS</div>
@@ -802,7 +802,11 @@ def show_credits():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
+
+    # Use components.html for reliable rendering of complex HTML + CSS animation
+    import streamlit.components.v1 as components
+    components.html(credits_html, height=520, scrolling=False)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
