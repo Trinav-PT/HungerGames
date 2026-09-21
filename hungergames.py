@@ -34,29 +34,6 @@ else:
 
 
 # ============================================================
-# CHEWIE IMAGE
-# ============================================================
-
-def get_base64_file(file_path):
-    with open(file_path, "rb") as file:
-        return base64.b64encode(file.read()).decode()
-
-
-chewie_path = "chewie.jpg"
-tf_path = "tf.gif"
-
-if os.path.exists(chewie_path):
-    chewie_base64 = get_base64_file(chewie_path)
-else:
-    chewie_base64 = ""
-
-if os.path.exists(tf_path):
-    tf_base64 = get_base64_file(tf_path)
-else:
-    tf_base64 = ""
-
-
-# ============================================================
 # SESSION STATE
 # ============================================================
 
@@ -83,9 +60,6 @@ if "name_submitted" not in st.session_state:
 
 if "access_denied" not in st.session_state:
     st.session_state.access_denied = False
-
-if "chewie_mode" not in st.session_state:
-    st.session_state.chewie_mode = False
 
 
 # ============================================================
@@ -327,370 +301,10 @@ st.markdown(
         100% {{ transform: translateX(0); }}
     }}
 
-    /* ========================================================
-       CHEWIE MODE
-       ======================================================== */
-
-    .chewie-page {{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #000;
-        z-index: 999999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }}
-
-    .chewie-content {{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 70px;
-        width: 100%;
-    }}
-
-    .chewie-spin {{
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
-        border-radius: 50%;
-        animation: chewie-spin 2s linear infinite;
-    }}
-
-    .tf-gif {{
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
-    }}
-
-    @keyframes chewie-spin {{
-        from {{
-            transform: rotate(0deg);
-        }}
-        to {{
-            transform: rotate(360deg);
-        }}
-    }}
-
-    .chewie-button {{
-        position: fixed;
-        bottom: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 250px !important;
-        background: #000 !important;
-        color: #777 !important;
-        border: 1px solid #333 !important;
-        z-index: 1000000;
-    }}
-
-    .chewie-button:hover {{
-        color: #fff !important;
-        border-color: #777 !important;
-        background: #111 !important;
-    }}
-
     </style>
     """,
     unsafe_allow_html=True
 )
-
-
-# ============================================================
-# CHEWIE MODE
-# ============================================================
-
-def show_chewie():
-
-    st.markdown(
-        f"""
-        <div class="chewie-page">
-
-            <div class="chewie-content">
-
-                <img
-                    src="data:image/jpeg;base64,{chewie_base64}"
-                    class="chewie-spin"
-                />
-
-                <img
-                    src="data:image/gif;base64,{tf_base64}"
-                    class="tf-gif"
-                />
-
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        """
-        <style>
-            .stButton {
-                position: relative;
-                z-index: 1000001;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    if st.button(
-        "RE-ENTER THE ARENA",
-        key="chewie_return"
-    ):
-
-        st.session_state.chewie_mode = False
-        st.session_state.page = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.session_state.result = None
-        st.session_state.scores = None
-        st.session_state.name = ""
-        st.session_state.name_submitted = False
-
-        st.rerun()
-
-
-# ============================================================
-# ACCESS DENIED
-# ============================================================
-
-def show_access_denied():
-
-    st.markdown(
-        f"""
-        <div class="access-denied">
-
-            <div class="access-title">
-                ACCESS DENIED
-            </div>
-
-            <div class="access-message">
-                you cannot play as me
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    if st.button("RE-ENTER THE ARENA"):
-
-        st.session_state.access_denied = False
-        st.session_state.page = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.session_state.result = None
-        st.session_state.scores = None
-        st.session_state.name = ""
-        st.session_state.name_submitted = False
-
-        st.rerun()
-
-
-# ============================================================
-# NAME SCREEN
-# ============================================================
-
-def show_name_screen():
-
-    st.markdown(
-        """
-        <div class="name-container">
-
-            <div class="name-title">
-                ENTER YOUR NAME
-            </div>
-
-            <div class="name-subtitle">
-                THE CAPITOL IS WATCHING
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    entered_name = st.text_input(
-        "Name",
-        value=st.session_state.name,
-        label_visibility="collapsed",
-        placeholder="Enter your name..."
-    )
-
-    if st.button("ENTER THE ARENA"):
-
-        entered_name = entered_name.strip()
-
-        if not entered_name:
-            st.error("Please enter your name.")
-            st.stop()
-
-        # ====================================================
-        # CHEWIE EASTER EGG
-        # ====================================================
-
-        if "chewie" in entered_name.lower():
-
-            st.session_state.chewie_mode = True
-            st.rerun()
-
-        # ====================================================
-        # TRINAV EASTER EGG
-        # ====================================================
-
-        if "trinav" in entered_name.lower():
-
-            st.session_state.access_denied = True
-            st.rerun()
-
-        # ====================================================
-        # CHARACTER NAME CHECK
-        # ====================================================
-
-        character_names = {
-            character.lower()
-            for character in CHARACTERS
-        }
-
-        if entered_name.lower() in character_names:
-
-            st.error(
-                "you think you can choose your own fate?"
-            )
-            st.stop()
-
-        st.session_state.name = entered_name
-        st.session_state.name_submitted = True
-        st.session_state.page = 0
-
-        st.rerun()
-
-
-# ============================================================
-# RESULT SCREEN
-# ============================================================
-
-def show_result():
-
-    character = st.session_state.result
-    scores = st.session_state.scores
-
-    st.markdown(
-        """
-        <div class="result-container">
-
-            <div class="fire-symbol">
-                🔥
-            </div>
-
-            <div class="result-small">
-                THE REAPING IS COMPLETE
-            </div>
-
-            <div class="result-title">
-                YOUR CHARACTER
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.html(
-        f"""
-        <div class="result-card">
-
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 1rem;
-                color: #999;
-                letter-spacing: 4px;
-                text-transform: uppercase;
-            ">
-                THE CAPITOL HAS SPOKEN
-            </div>
-
-            <div style="
-                font-family: 'Cinzel', serif;
-                font-size: 3.5rem;
-                font-weight: 800;
-                color: #e6b84a;
-                margin: 1rem 0;
-                letter-spacing: 3px;
-            ">
-                {character.upper()}
-            </div>
-
-            <div class="result-score">
-                Final score: {scores[character]}
-            </div>
-
-        </div>
-        """
-    )
-
-    with st.expander("View your scores"):
-
-        sorted_scores = sorted(
-            scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-
-        for char, score in sorted_scores:
-            st.write(f"**{char}** — {score}")
-
-    st.markdown(
-        "<br>",
-        unsafe_allow_html=True
-    )
-
-    if st.button("RE-ENTER THE ARENA"):
-
-        st.session_state.page = 0
-        st.session_state.answers = []
-        st.session_state.finished = False
-        st.session_state.result = None
-        st.session_state.scores = None
-        st.session_state.name = ""
-        st.session_state.name_submitted = False
-
-        st.rerun()
-
-
-# ============================================================
-# MAIN ROUTING
-# ============================================================
-
-if st.session_state.chewie_mode:
-
-    show_chewie()
-    st.stop()
-
-
-if st.session_state.access_denied:
-
-    show_access_denied()
-    st.stop()
-
-
-if not st.session_state.name_submitted:
-
-    show_name_screen()
-    st.stop()
-
-
-if st.session_state.finished:
-
-    show_result()
-    st.stop()
 
 
 # ============================================================
@@ -1169,14 +783,203 @@ def determine_character():
 
 
 # ============================================================
-# MAIN ROUTING
+# ACCESS DENIED
 # ============================================================
 
-if st.session_state.chewie_mode:
+def show_access_denied():
 
-    show_chewie()
-    st.stop()
+    st.markdown(
+        f"""
+        <div class="access-denied">
 
+            <div class="access-title">
+                ACCESS DENIED
+            </div>
+
+            <div class="access-message">
+                you cannot play as me
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    if st.button("RE-ENTER THE ARENA"):
+
+        st.session_state.access_denied = False
+        st.session_state.page = 0
+        st.session_state.answers = []
+        st.session_state.finished = False
+        st.session_state.result = None
+        st.session_state.scores = None
+        st.session_state.name = ""
+        st.session_state.name_submitted = False
+
+        st.rerun()
+
+
+# ============================================================
+# NAME SCREEN
+# ============================================================
+
+def show_name_screen():
+
+    st.markdown(
+        """
+        <div class="name-container">
+
+            <div class="name-title">
+                ENTER YOUR NAME
+            </div>
+
+            <div class="name-subtitle">
+                THE CAPITOL IS WATCHING
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    entered_name = st.text_input(
+        "Name",
+        value=st.session_state.name,
+        label_visibility="collapsed",
+        placeholder="Enter your name..."
+    )
+
+    if st.button("ENTER THE ARENA"):
+
+        entered_name = entered_name.strip()
+
+        if not entered_name:
+            st.error("Please enter your name.")
+            st.stop()
+
+        if "trinav" in entered_name.lower():
+
+            st.session_state.access_denied = True
+            st.rerun()
+
+        character_names = {
+            character.lower()
+            for character in CHARACTERS
+        }
+
+        if entered_name.lower() in character_names:
+
+            st.error(
+                "you think you can choose your own fate?"
+            )
+            st.stop()
+
+        st.session_state.name = entered_name
+        st.session_state.name_submitted = True
+        st.session_state.page = 0
+
+        st.rerun()
+
+
+# ============================================================
+# RESULT SCREEN
+# ============================================================
+
+def show_result():
+
+    character = st.session_state.result
+    scores = st.session_state.scores
+
+    st.markdown(
+        """
+        <div class="result-container">
+
+            <div class="fire-symbol">
+                🔥
+            </div>
+
+            <div class="result-small">
+                THE REAPING IS COMPLETE
+            </div>
+
+            <div class="result-title">
+                YOUR CHARACTER
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # FIX:
+    # Use st.html() instead of st.markdown() so Streamlit
+    # does not interpret the HTML as Markdown/text.
+
+    st.html(
+        f"""
+        <div class="result-card">
+
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 1rem;
+                color: #999;
+                letter-spacing: 4px;
+                text-transform: uppercase;
+            ">
+                THE CAPITOL HAS SPOKEN
+            </div>
+
+            <div style="
+                font-family: 'Cinzel', serif;
+                font-size: 3.5rem;
+                font-weight: 800;
+                color: #e6b84a;
+                margin: 1rem 0;
+                letter-spacing: 3px;
+            ">
+                {character.upper()}
+            </div>
+
+            <div class="result-score">
+                Final score: {scores[character]}
+            </div>
+
+        </div>
+        """
+    )
+
+    with st.expander("View your scores"):
+
+        sorted_scores = sorted(
+            scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+
+        for char, score in sorted_scores:
+            st.write(f"**{char}** — {score}")
+
+    st.markdown(
+        "<br>",
+        unsafe_allow_html=True
+    )
+
+    if st.button("RE-ENTER THE ARENA"):
+
+        st.session_state.page = 0
+        st.session_state.answers = []
+        st.session_state.finished = False
+        st.session_state.result = None
+        st.session_state.scores = None
+        st.session_state.name = ""
+        st.session_state.name_submitted = False
+
+        st.rerun()
+
+
+# ============================================================
+# MAIN ROUTING
+# ============================================================
 
 if st.session_state.access_denied:
 
