@@ -358,6 +358,20 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-top: 3rem;
 }
+
+/* Restart button styling */
+.restart-btn button {
+    background: transparent !important;
+    border: 1px solid #555 !important;
+    color: #999 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    margin-top: 1.5rem !important;
+}
+.restart-btn button:hover {
+    border-color: #e6b84a !important;
+    color: #e6b84a !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -374,6 +388,7 @@ CHARACTERS = [
 # ALL 9 QUESTIONS (base list)
 # ============================================================
 BASE_QUESTIONS = [
+    # ===== HUNGER GAMES QUESTIONS =====
     {
         "question": "You're on the Capitol train and dinner arrives. There are approximately 47 dishes in front of you. You have no idea what half of them are.",
         "options": [
@@ -481,6 +496,8 @@ BASE_QUESTIONS = [
             "Beetee":   [3, 0, 0, 0, 3, 0]
         }
     },
+
+    # ===== ORIGINAL PLAKSHA QUESTIONS =====
     {
         "question": "What are you most given to do if you have an upcoming test and wifi is down (for a long time)?",
         "options": [
@@ -555,9 +572,9 @@ BASE_QUESTIONS = [
             "Cinna":    [2, 1, 2, 1, 3],
             "Johanna":  [3, -1, 1, 2, 0],
             "Effie":    [0, 2, 1, 3, 2],
-            "Plutarch": [0, 0, 0, 0, 0, 0],
-            "Foxface":  [0, 0, 0, 0, 0, 0],
-            "Beetee":   [0, 0, 0, 0, 0, 0]
+            "Plutarch": [0, 0, 0, 0, 0],
+            "Foxface":  [0, 0, 0, 0, 0],
+            "Beetee":   [0, 0, 0, 0, 0]
         }
     },
     {
@@ -639,14 +656,14 @@ if "name_submitted" not in st.session_state:
 if "haunted" not in st.session_state:
     st.session_state.haunted = False
 
-# Shuffle questions once per session
+# Shuffle questions once per session (reshuffles on full page refresh)
 if "shuffled_questions" not in st.session_state:
     st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
 
 QUESTIONS = st.session_state.shuffled_questions
 
 # ============================================================
-# HAUNTING BACKGROUND (sansback.jpeg) - ZOOMED OUT
+# HAUNTING BACKGROUND (sansback.jpeg)
 # ============================================================
 if st.session_state.haunted and sansback_base64:
     st.markdown(f"""
@@ -655,9 +672,8 @@ if st.session_state.haunted and sansback_base64:
             background-image:
                 linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)),
                 url("data:image/jpeg;base64,{sansback_base64}") !important;
-            background-size: 80% !important;
+            background-size: cover !important;
             background-position: center !important;
-            background-repeat: no-repeat !important;
             background-attachment: fixed !important;
         }}
         </style>
@@ -708,7 +724,6 @@ def show_access_denied():
     with col2:
         if st.button("RETURN TO REAPING"):
             st.session_state.access_denied = False
-            st.session_state.haunted = False
             st.session_state.name = ""
             st.session_state.name_submitted = False
             st.rerun()
@@ -790,7 +805,7 @@ def show_result():
         st.session_state.scores = None
         st.session_state.name = ""
         st.session_state.name_submitted = False
-        st.session_state.haunted = False
+        # Note: haunted flag is intentionally NOT cleared here
         st.rerun()
 
 # ============================================================
@@ -820,11 +835,6 @@ if st.session_state.finished:
 # NAME CHECK
 # ============================================================
 if not st.session_state.name_submitted:
-    if st.session_state.haunted:
-        st.session_state.name = "The Intruder"
-        st.session_state.name_submitted = True
-        st.rerun()
-
     st.markdown("""
         <div class="name-container">
             <div class="name-title">STATE YOUR NAME</div>
@@ -842,7 +852,6 @@ if not st.session_state.name_submitted:
             st.stop()
 
         if "trinav" in entered_name.lower():
-            st.session_state.haunted = True
             st.session_state.access_denied = True
             st.rerun()
 
@@ -858,7 +867,7 @@ if not st.session_state.name_submitted:
         st.session_state.name_submitted = True
         st.rerun()
 
-    st.stop()
+    st.stop()   # ← no restart button on name screen
 
 # ============================================================
 # CURRENT QUESTION
@@ -876,33 +885,54 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown(f'<div class="question-number">QUESTION {q_index + 1}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="question-number">THE ARENA · QUESTION {q_index + 1}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="question-text">{question["question"]}</div>', unsafe_allow_html=True)
-st.markdown("<br>", unsafe_allow_html=True)
 
-options = question["options"]
-selected_option = st.radio(
-    label="Choose your action:",
-    options=options,
-    key=f"q_{q_index}",
-    label_visibility="collapsed"
-)
+option_labels = [f"{chr(65 + i)}. {option}" for i, option in enumerate(question["options"])]
+selected = st.radio("Choose your answer:", option_labels, index=None, key=f"question_{q_index}", label_visibility="collapsed")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    if st.button("NEXT QUESTION" if q_index < total_questions - 1 else "SEE YOUR CHARACTER"):
-        answer_index = options.index(selected_option)
-        st.session_state.answers.append(answer_index)
-
-        if q_index < total_questions - 1:
+if selected is not None:
+    selected_index = option_labels.index(selected)
+    if q_index < total_questions - 1:
+        if st.button("CONTINUE →"):
+            st.session_state.answers.append(selected_index)
             st.session_state.page += 1
             st.rerun()
-        else:
+    else:
+        if st.button("ENTER THE REAPING"):
+            st.session_state.answers.append(selected_index)
             scores = calculate_scores(st.session_state.answers)
-            char, tied = determine_character(scores)
-            st.session_state.result = char
+            character, _ = determine_character(scores)
             st.session_state.scores = scores
+            st.session_state.result = character
             st.session_state.finished = True
             st.rerun()
+else:
+    st.markdown("""
+        <div style="text-align:center;color:#666;font-size:0.8rem;letter-spacing:1px;margin-top:0.5rem;">
+            SELECT AN OPTION TO CONTINUE
+        </div>
+    """, unsafe_allow_html=True)
+
+# ---------- RESTART BUTTON (only during questions) ----------
+st.markdown("<br>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
+    if st.button("Had a change of heart? Restart Quiz"):
+        st.session_state.page = 0
+        st.session_state.answers = []
+        st.session_state.finished = False
+        st.session_state.result = None
+        st.session_state.scores = None
+        st.session_state.name = ""
+        st.session_state.name_submitted = False
+        st.session_state.haunted = True          # activate haunting
+        # reshuffle questions on restart
+        st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
