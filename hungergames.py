@@ -697,46 +697,56 @@ def determine_character(scores):
 # CREDITS
 # ============================================================
 def show_credits():
+    st.markdown('<div class="credits-title">CREDITS</div>', unsafe_allow_html=True)
+
     st.markdown("""
-        <div class="credits-container">
-            <div class="credits-title">CREDITS</div>
+    <div class="credits-section">
+        <div class="credits-role">Made with DETERMINATION by</div>
+        <div class="credits-name">members of The Spine</div>
+        <div class="credits-special">(watch till the end for secrets 👀)</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Made with DETERMINATION by</div>
-                <div class="credits-name">members of The Spine</div>
-                <div class="credits-special">(watch till the end for secrets 👀)</div>
-            </div>
+    st.markdown("""
+    <div class="credits-section">
+        <div class="credits-role">Questions Made by</div>
+        <div class="credits-name">Simran and Zaina</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Questions Made by</div>
-                <div class="credits-name">Simran and Zaina</div>
-            </div>
+    st.markdown("""
+    <div class="credits-section">
+        <div class="credits-role">Character Descs written by</div>
+        <div class="credits-name">Avani</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Character Descs written by</div>
-                <div class="credits-name">Avani</div>
-            </div>
+    st.markdown("""
+    <div class="credits-section">
+        <div class="credits-role">Site Dev and stupid Undertale references</div>
+        <div class="credits-name">Trinav</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Site Dev and stupid Undertale references</div>
-                <div class="credits-name">Trinav</div>
-            </div>
+    st.markdown("""
+    <div class="credits-section">
+        <div class="credits-role">Name you should not enter</div>
+        <div class="credits-name">Trinav</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Name you should not enter</div>
-                <div class="credits-name">Trinav</div>
-            </div>
+    st.markdown("""
+    <div class="credits-section">
+        <div class="credits-role">Name you should enter</div>
+        <div class="credits-name">Chewie</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-            <div class="credits-section">
-                <div class="credits-role">Name you should enter</div>
-                <div class="credits-name">Chewie</div>
-            </div>
-
-            <div class="credits-secret">
-                ...you really watched till the end?<br>
-                Respect.
-            </div>
-        </div>
+    st.markdown("""
+    <div class="credits-secret">
+        ...you really watched till the end?<br>
+        Respect.
+    </div>
     """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
