@@ -1,4 +1,3 @@
-```python
 import streamlit as st
 import random
 from collections import Counter
@@ -870,8 +869,3 @@ st.markdown(
     '<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>',
     unsafe_allow_html=True
 )
-```
-
-One important detail: I interpreted **“any of the characters that can get from the quiz”** as the exact character names in `CHARACTERS`, case-insensitive. So `Katniss`, `KATNISS`, and `katniss` are blocked, but something like `Katniss123` is allowed.
-
-Also, I used `st.error(...)` + `st.stop()` rather than deliberately throwing a Python exception. That gives you the **crash/locked-out effect** visually without producing Streamlit's ugly generic error traceback.
