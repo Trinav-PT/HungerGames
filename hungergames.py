@@ -24,8 +24,9 @@ def get_base64_image(image_path):
     return ""
 
 gaster_base64 = get_base64_image("gasterbg.jfif")
-chewie_base64 = get_base64_image("chewie.jpeg")   # fixed extension
+chewie_base64 = get_base64_image("chewie.jpeg")
 tf_base64 = get_base64_image("tf.gif")
+sansback_base64 = get_base64_image("sansback.jpeg")
 
 # ============================================================
 # HUNGER GAMES INSPIRED STYLING
@@ -357,6 +358,20 @@ div[data-testid="stRadio"] label p {
     text-transform: uppercase;
     margin-top: 3rem;
 }
+
+/* Restart button styling */
+.restart-btn button {
+    background: transparent !important;
+    border: 1px solid #555 !important;
+    color: #999 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    margin-top: 1.5rem !important;
+}
+.restart-btn button:hover {
+    border-color: #e6b84a !important;
+    color: #e6b84a !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -370,9 +385,9 @@ CHARACTERS = [
 ]
 
 # ============================================================
-# ALL 9 QUESTIONS
+# ALL 9 QUESTIONS (base list)
 # ============================================================
-QUESTIONS = [
+BASE_QUESTIONS = [
     # ===== HUNGER GAMES QUESTIONS =====
     {
         "question": "You're on the Capitol train and dinner arrives. There are approximately 47 dishes in front of you. You have no idea what half of them are.",
@@ -638,6 +653,31 @@ if "name" not in st.session_state:
     st.session_state.name = ""
 if "name_submitted" not in st.session_state:
     st.session_state.name_submitted = False
+if "haunted" not in st.session_state:
+    st.session_state.haunted = False
+
+# Shuffle questions once per session (reshuffles on full page refresh)
+if "shuffled_questions" not in st.session_state:
+    st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
+
+QUESTIONS = st.session_state.shuffled_questions
+
+# ============================================================
+# HAUNTING BACKGROUND (sansback.jpeg)
+# ============================================================
+if st.session_state.haunted and sansback_base64:
+    st.markdown(f"""
+        <style>
+        .stApp {{
+            background-image:
+                linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)),
+                url("data:image/jpeg;base64,{sansback_base64}") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
+        }}
+        </style>
+    """, unsafe_allow_html=True)
 
 # ============================================================
 # SCORING
@@ -730,7 +770,6 @@ def show_result():
         </div>
     """, unsafe_allow_html=True)
 
-    # ---------- ALIGNMENT STATS BEHIND EXPANDER ----------
     with st.expander("VIEW ALIGNMENT"):
         score_dict = dict(scores)
         min_s = min(score_dict.values()) if score_dict else 0
@@ -766,6 +805,7 @@ def show_result():
         st.session_state.scores = None
         st.session_state.name = ""
         st.session_state.name_submitted = False
+        # Note: haunted flag is intentionally NOT cleared here
         st.rerun()
 
 # ============================================================
@@ -825,6 +865,26 @@ if not st.session_state.name_submitted:
         st.session_state.name = entered_name
         st.session_state.name_submitted = True
         st.rerun()
+
+    # Restart button also available on name screen
+    st.markdown("<br>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
+        if st.button("Had a change of heart? Restart Quiz"):
+            st.session_state.page = 0
+            st.session_state.answers = []
+            st.session_state.finished = False
+            st.session_state.result = None
+            st.session_state.scores = None
+            st.session_state.name = ""
+            st.session_state.name_submitted = False
+            st.session_state.haunted = True          # activate haunting
+            # reshuffle questions on restart as well
+            st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
+
     st.stop()
 
 # ============================================================
@@ -873,5 +933,24 @@ else:
             SELECT AN OPTION TO CONTINUE
         </div>
     """, unsafe_allow_html=True)
+
+# ---------- RESTART BUTTON (during quiz only) ----------
+st.markdown("<br>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.markdown('<div class="restart-btn">', unsafe_allow_html=True)
+    if st.button("Had a change of heart? Restart Quiz"):
+        st.session_state.page = 0
+        st.session_state.answers = []
+        st.session_state.finished = False
+        st.session_state.result = None
+        st.session_state.scores = None
+        st.session_state.name = ""
+        st.session_state.name_submitted = False
+        st.session_state.haunted = True          # activate haunting
+        # reshuffle on restart
+        st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="hg-footer">PANEM · THE CAPITOL · MAY THE ODDS BE EVER IN YOUR FAVOUR</div>', unsafe_allow_html=True)
