@@ -200,9 +200,9 @@ div[data-testid="stRadio"] label p {
 .result-title {
     font-family: 'Cinzel', serif;
     color: #e6b84a;
-    font-size: 3.6rem;
+    font-size: 2.8rem;
     font-weight: 800;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     margin: 1rem 0;
     text-shadow: 0 0 15px rgba(230,184,74,0.3), 0 0 35px rgba(150,20,20,0.2);
 }
@@ -344,7 +344,6 @@ if st.session_state.gaster_mode:
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
-
     html, body, [class*="css"], .stApp, .stMarkdown, p, div, span, label, 
     button, input, textarea, h1, h2, h3, h4, h5, h6, 
     .stButton > button, .stRadio label, .stTextInput input {
@@ -361,6 +360,37 @@ CHARACTERS = [
     "Rue", "Snow", "Cinna", "Johanna", "Effie",
     "Plutarch", "Foxface", "Beetee"
 ]
+
+# ============================================================
+# CHARACTER DESCRIPTIONS
+# ============================================================
+DESCRIPTIONS = {
+    "Katniss": "Katniss (named after katniss) is fiercely independent and takes on the protector role in her relationships. Having lost her father at a young age, she’s an avoidant self-sufficient and works hard to keep her family afloat. She’s determined and goal oriented, but also incredibly compassionate. She also lets her intrusive thoughts win (hello mr seneca crane). In a revolution, she represents most people; wanting to keep her head low and survive the oppressive system. She has plenty of fire herself.",
+    
+    "Peeta": "Soft and loving, Peeta is the ultimate green flag. He cares deeply and unforgivingly. Peeta is the rare type in a revolution; kind, charismatic and displays a refusal to play by the system’s violence. Hardly jumps to conclusions and tries to understand everyone. Mature and selfless, he rarely complains even when he has plenty of reason to. He is the dandelion in the spring.",
+    
+    "Gale": "Gale is the typical revolutionary; angry, brave and willing to fight for freedom even through violent means. Gale gives in to his anger and need for revenge as time goes on. Similar to Katniss, he has a lot of fire in him. He respected anyone for their skills and resilience and carried resentment to those more privileged than him. His bravery saved hundreds of lives from being killed.",
+    
+    "Effie": "Effie is a perfectionist and extremely punctual (a five-minute train delay will hugely affect her schedule). She is bright and bubbly at times. She sees the hunger games as just fun entertainment. Out of touch from reality, but loving nonetheless. She grows fond of her loving victors.",
+    
+    "Haymitch": "Everyone assumes Haymitch is simply the town drunk. But Haymitch is complex and has had a tough life. He’s a good mentor figure to Katniss and Peeta, but he’s not really an amazing father figure. Haymitch is incredibly intelligent, orchestrates a rebellion against the capitol and manages to communicate with Katniss in her manner.",
+    
+    "Finnick": "The youngest victor of the hunger games, and a fan favourite. Loved by all, and fantasized by a lot in the capitol, he still has his one true love at home. His love for Annie grounds him in a way, because their love makes everything he has ever endured worth it. He is known for his charm and exceptional skill with a trident. He’s extremely popular among the capitol crowd.",
+    
+    "Prim": "Prim’s innocence, kindness and gentle nature serves as the backbone of this story. A young healer, she is sheltered from a lot because of her elder sisters work. She grows up to be caring and a wonderful doctor. She loves her stupid cat. Like Peeta, she is not inclined towards violence.",
+    
+    "Rue": "Being reaped for the hunger games at the young age of 12, Rue is the symbolism of innocence and youth. Katniss saw Rue as someone to protect and take care of. Katniss and Rue cling onto each other. Rue tells stories about her life, and they sing. Though not a fighter, Rue is nimble, clever and resourceful. She is the beginning of the rebellion.",
+    
+    "Snow": "Beginning as an ambitious, impoverished Capitol orphan, Snow practically morphs into a psychopath. He’s calculated and manipulative and is in fear of losing his power, leading him to poison any threats. His charm is his currency. Ambitious and intelligent, he never lies. But he’s still a psychopath.",
+    
+    "Cinna": "Cinna is Katniss’s empathetic and brilliant stylist. He's a key underground rebellion leader and proves that rebellion doesn’t always mean heavy shots and elaborate plans, but can be depicted through small acts of resistance, such as a twirl. He believes fully in Katniss and knows she can win. He coins the term ‘girl on fire’.",
+    
+    "Johanna": "A fucking rebel through and through. Tough and says whats on everyone’s mind. That being said, she’s only the way she is because the capitol’s already taken everyone she can care for. She openly hates the Capitol and Snow and shows no desire to hold that back. Not everyone’s favourite, but she’s exactly who she says she is and doesn’t really care whether people like her.",
+    
+    "Plutarch": "A master strategist and political chameleon. He plays the long game and is always three steps ahead.",
+    "Foxface": "Quiet, observant and extremely clever. She survives by staying invisible and using her intelligence rather than force.",
+    "Beetee": "The quiet genius. He sees systems, patterns and weaknesses that others miss, and uses technology as his weapon."
+}
 
 # ============================================================
 # ALL 9 QUESTIONS (base list)
@@ -759,13 +789,16 @@ def show_chewie():
 def show_result():
     character = st.session_state.result
     scores = st.session_state.scores
-    st.markdown("""
+    user_name = st.session_state.name
+
+    st.markdown(f"""
         <div class="result-container">
             <div class="fire-symbol">🔥</div>
             <div class="result-small">THE REAPING IS COMPLETE</div>
-            <div class="result-title">YOUR CHARACTER</div>
+            <div class="result-title">{user_name}, your character is</div>
         </div>
     """, unsafe_allow_html=True)
+
     st.markdown(f"""
         <div class="result-card">
             <div class="result-capitol">THE CAPITOL HAS SPOKEN</div>
@@ -773,6 +806,26 @@ def show_result():
             <div class="result-score">Final score: {scores[character]}</div>
         </div>
     """, unsafe_allow_html=True)
+
+    # Character Description
+    description = DESCRIPTIONS.get(character, "No description available.")
+    st.markdown(f"""
+        <div style="
+            max-width: 750px;
+            margin: 2rem auto;
+            padding: 2rem 2.2rem;
+            background: #111111;
+            border: 1px solid #3a3a3a;
+            border-top: 2px solid #e6b84a;
+            color: #dddddd;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            text-align: left;
+        ">
+            {description}
+        </div>
+    """, unsafe_allow_html=True)
+
     with st.expander("VIEW ALIGNMENT"):
         score_dict = dict(scores)
         min_s = min(score_dict.values()) if score_dict else 0
@@ -794,6 +847,7 @@ def show_result():
             rows.append(row)
         bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
         st.markdown(bars_html, unsafe_allow_html=True)
+
     st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
@@ -954,7 +1008,7 @@ with col2:
         st.session_state.name = ""
         st.session_state.name_submitted = False
         st.session_state.haunted = True
-        st.session_state.gaster_mode = False          # also reset Gaster
+        st.session_state.gaster_mode = False
         st.session_state.shuffled_questions = random.sample(BASE_QUESTIONS, len(BASE_QUESTIONS))
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
