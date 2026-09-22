@@ -817,53 +817,19 @@ def show_chewie():
             st.rerun()
 
 def show_result():
+    # Force the page to the very top when the results screen appears
+    st.markdown("""
+        <script>
+            window.parent.scrollTo(0, 0);
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        </script>
+    """, unsafe_allow_html=True)
+
     character = st.session_state.result
     scores = st.session_state.scores
     user_name = st.session_state.name
-
-    # ---------- FORCE SCROLL TO TOP (works on mobile + desktop) ----------
-    st.markdown(
-        """
-        <div id="top-of-results"></div>
-        <script>
-            function forceScrollTop() {
-                // Try every possible scroll container Streamlit uses
-                const targets = [
-                    window,
-                    window.parent,
-                    document.documentElement,
-                    document.body,
-                    window.parent.document.documentElement,
-                    window.parent.document.body,
-                    window.parent.document.querySelector('section.main'),
-                    window.parent.document.querySelector('[data-testid="stAppViewContainer"]'),
-                    window.parent.document.querySelector('.main'),
-                    window.parent.document.querySelector('.stApp'),
-                    document.querySelector('section.main')
-                ];
-
-                targets.forEach(el => {
-                    if (el) {
-                        try {
-                            el.scrollTo(0, 0);
-                            el.scrollTop = 0;
-                        } catch (e) {}
-                    }
-                });
-            }
-
-            // Run immediately + several delayed attempts (mobile browsers need this)
-            forceScrollTop();
-            setTimeout(forceScrollTop, 50);
-            setTimeout(forceScrollTop, 150);
-            setTimeout(forceScrollTop, 400);
-            setTimeout(forceScrollTop, 800);
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # ... the rest of your show_result() code stays exactly the same
 
     st.markdown(f"""
         <div class="result-container">
