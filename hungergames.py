@@ -3,7 +3,7 @@ import random
 from collections import Counter
 import base64
 import os
-
+import streamlit.components.v1 as components
 # ============================================================
 # PAGE CONFIG
 # ============================================================
@@ -817,15 +817,47 @@ def show_chewie():
             st.rerun()
 
 def show_result():
-    # Force the page to the very top when the results screen appears
-    st.markdown("""
+    # Force the browser to the very top of the page when results load.
+    # This uses a real Streamlit HTML component because JavaScript inside
+    # st.markdown() is not reliably executed.
+    components.html("""
         <script>
-            window.parent.scrollTo(0, 0);
-            window.scrollTo(0, 0);
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
+        function forceTop() {
+            try {
+                // Main document
+                window.parent.scrollTo(0, 0);
+                window.parent.document.documentElement.scrollTop = 0;
+                window.parent.document.body.scrollTop = 0;
+
+                // Streamlit's main scrolling containers
+                const parentDoc = window.parent.document;
+
+                const elements = parentDoc.querySelectorAll(
+                    'section, main, [data-testid="stAppViewContainer"], ' +
+                    '[data-testid="stAppViewBlockContainer"], ' +
+                    '[data-testid="stVerticalBlockBorderWrapper"]'
+                );
+
+                elements.forEach(function(el) {
+                    if (el.scrollTop > 0) {
+                        el.scrollTop = 0;
+                    }
+                });
+            } catch (e) {
+                // Ignore browser restrictions
+            }
+        }
+
+        // Run several times because Streamlit may still be rendering
+        // the result screen when the first scroll command happens.
+        forceTop();
+        setTimeout(forceTop, 50);
+        setTimeout(forceTop, 150);
+        setTimeout(forceTop, 300);
+        setTimeout(forceTop, 500);
+        setTimeout(forceTop, 800);
         </script>
-    """, unsafe_allow_html=True)
+    """, height=1)
 
     character = st.session_state.result
     scores = st.session_state.scores
@@ -838,6 +870,7 @@ def show_result():
             <div class="result-title">{user_name}, your character is</div>
         </div>
     """, unsafe_allow_html=True)
+
     # Character Image
     img_data = CHARACTER_IMAGES.get(character, "")
     if img_data:
@@ -895,10 +928,12 @@ def show_result():
         total = sum(shifted.values()) or 1
         ranked = sorted(shifted.items(), key=lambda x: x[1], reverse=True)
         rows = []
+
         for char, val in ranked:
             pct = (val / total) * 100
             if pct < 1.0:
                 continue
+
             row = (
                 f'<div class="pct-row">'
                 f'<div class="pct-label">{char}</div>'
@@ -907,11 +942,14 @@ def show_result():
                 f'</div>'
             )
             rows.append(row)
+
         bars_html = '<div class="pct-container">' + "".join(rows) + '</div>'
         st.markdown(bars_html, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
+
     col1, col2, col3 = st.columns([1, 1, 1])
+
     with col1:
         if st.button("RE-ENTER THE ARENA"):
             st.session_state.page = 0
@@ -922,6 +960,7 @@ def show_result():
             st.session_state.name = ""
             st.session_state.name_submitted = False
             st.rerun()
+
     with col3:
         if st.button("CREDITS"):
             st.session_state.show_credits = True
