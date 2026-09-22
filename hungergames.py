@@ -715,6 +715,10 @@ def show_credits():
 <div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Trinav</div>
 </div>
 <div style="margin-bottom:2.8rem;">
+<div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Poster Design</div>
+<div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#f1f1f1;">Sara</div>
+</div>
+<div style="margin-bottom:2.8rem;">
 <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;">Names you should not enter</div>
 <div style="font-family:'Cinzel',serif;font-size:1.45rem;color:#c52c2c;">Trinav<br>Gaster (if you're on your laptop)</div>
 </div>
