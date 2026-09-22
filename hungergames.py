@@ -821,6 +821,26 @@ def show_result():
     scores = st.session_state.scores
     user_name = st.session_state.name
 
+    # ---------- FORCE SCROLL TO TOP (especially important on mobile) ----------
+    st.markdown(
+        """
+        <script>
+            // Force scroll to the top of the page when results appear
+            window.scrollTo(0, 0);
+            const main = window.parent.document.querySelector('section.main');
+            if (main) {
+                main.scrollTo({ top: 0, behavior: 'instant' });
+            }
+            // Fallback with a tiny delay for slower mobile browsers
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+                if (main) main.scrollTo(0, 0);
+            }, 50);
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.markdown(f"""
         <div class="result-container">
             <div class="fire-symbol">🔥</div>
@@ -828,7 +848,6 @@ def show_result():
             <div class="result-title">{user_name}, your character is</div>
         </div>
     """, unsafe_allow_html=True)
-
     # Character Image
     img_data = CHARACTER_IMAGES.get(character, "")
     if img_data:
