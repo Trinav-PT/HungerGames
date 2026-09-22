@@ -720,6 +720,39 @@ def determine_character(scores):
 # CREDITS (static version that works)
 # ============================================================
 def show_credits():
+    # Force the page to the very top when credits appear
+    components.html("""
+    <script>
+    function forceTop() {
+        try {
+            window.parent.scrollTo(0, 0);
+            window.parent.document.documentElement.scrollTop = 0;
+            window.parent.document.body.scrollTop = 0;
+
+            const parentDoc = window.parent.document;
+            const elements = parentDoc.querySelectorAll(
+                'section, main, [data-testid="stAppViewContainer"], ' +
+                '[data-testid="stAppViewBlockContainer"], ' +
+                '[data-testid="stVerticalBlockBorderWrapper"]'
+            );
+
+            elements.forEach(function(el) {
+                if (el.scrollTop > 0) {
+                    el.scrollTop = 0;
+                }
+            });
+        } catch (e) {}
+    }
+
+    forceTop();
+    setTimeout(forceTop, 50);
+    setTimeout(forceTop, 150);
+    setTimeout(forceTop, 300);
+    setTimeout(forceTop, 500);
+    setTimeout(forceTop, 800);
+    </script>
+    """, height=1)
+
     st.markdown("""
 <div style="max-width:700px;margin:2rem auto 3rem auto;padding:3.5rem 2.5rem;text-align:center;background:radial-gradient(circle at top,#0a0a0a,#000000);border:2px solid #e6b84a;border-radius:12px;box-shadow:0 0 40px rgba(230,184,74,0.12);">
 <div style="font-family:'Cinzel',serif;font-size:2.4rem;color:#e6b84a;letter-spacing:6px;margin-bottom:3.5rem;text-transform:uppercase;">CREDITS</div>
