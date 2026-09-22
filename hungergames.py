@@ -27,6 +27,32 @@ gaster_base64 = get_base64_image("gasterbg.jfif")
 chewie_base64 = get_base64_image("chewie.jpeg")
 tf_base64 = get_base64_image("tf.gif")
 sansback_base64 = get_base64_image("sansback.jpeg")
+# Character images
+katniss_img = get_base64_image("Katniss.png")
+peeta_img = get_base64_image("Peeta.jfif")
+gale_img = get_base64_image("Gale.jfif")
+haymitch_img = get_base64_image("Haymitch.jfif")
+prim_img = get_base64_image("Prim.png")
+finnick_img = get_base64_image("Finnick.jfif")
+rue_img = get_base64_image("Rue.png")
+snow_img = get_base64_image("Snow.webp")
+cinna_img = get_base64_image("Cinna.jpg")
+johanna_img = get_base64_image("Johanna.jpg")
+effie_img = get_base64_image("Effie.jfif")
+
+CHARACTER_IMAGES = {
+    "Katniss": katniss_img,
+    "Peeta": peeta_img,
+    "Gale": gale_img,
+    "Haymitch": haymitch_img,
+    "Prim": prim_img,
+    "Finnick": finnick_img,
+    "Rue": rue_img,
+    "Snow": snow_img,
+    "Cinna": cinna_img,
+    "Johanna": johanna_img,
+    "Effie": effie_img,
+}
 
 # ============================================================
 # HUNGER GAMES INSPIRED STYLING
@@ -802,6 +828,29 @@ def show_result():
             <div class="result-title">{user_name}, your character is</div>
         </div>
     """, unsafe_allow_html=True)
+
+    # Character Image
+    img_data = CHARACTER_IMAGES.get(character, "")
+    if img_data:
+        # Determine correct mime type
+        if character in ["Katniss", "Prim", "Rue"]:
+            mime = "image/png"
+        elif character == "Snow":
+            mime = "image/webp"
+        elif character in ["Cinna", "Johanna"]:
+            mime = "image/jpeg"
+        else:
+            mime = "image/jpeg"  # for .jfif
+
+        st.markdown(f"""
+            <div style="text-align:center; margin: 1.5rem 0 2rem 0;">
+                <img src="data:{mime};base64,{img_data}"
+                     style="max-width: 320px; width: 100%; height: auto;
+                            border-radius: 12px;
+                            box-shadow: 0 0 30px rgba(230,184,74,0.25);
+                            border: 2px solid #e6b84a;">
+            </div>
+        """, unsafe_allow_html=True)
 
     st.markdown(f"""
         <div class="result-card">
